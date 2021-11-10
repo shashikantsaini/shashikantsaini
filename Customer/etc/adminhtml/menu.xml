@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Bluethink_Customer::customer" title="Customer Grid" module="Bluethink_Customer" sortOrder="51" resource="Bluethink_Customer::customer"/>
+        <add id="Bluethink_Customer::detail" title="Manage Customer" module="Bluethink_Customer" sortOrder="10" action="bluethink_customer/detail/index" resource="Bluethink_Customer::detail" parent="Bluethink_Customer::customer"/>
+    </menu>
+</config>
