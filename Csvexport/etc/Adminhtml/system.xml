@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="csv" translate="label" sortOrder="10">
+            <label>CSV Module</label>
+        </tab>
+        <section id="data" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Data Configration</label>
+            <tab>csv</tab>
+            <resource>Bluethink_Csvexport::csvexport_config</resource>
+            <group id="module" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Module Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="start_date" translate="label" type="time" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Date</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
