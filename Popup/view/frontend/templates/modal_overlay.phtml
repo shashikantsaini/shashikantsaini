@@ -1,0 +1,52 @@
+<div id="popup-modal">
+    <form id="subscribe_form" action="<?php echo $block->getBaseUrl() . 'subscribe/index/subscribe';?>" id="test-guest-form" method="post" data-hasrequired="* Required Fields" data-mage-init='{"validation": {}}' >
+        <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey(); ?>" />
+        <label class="label" for="email"><span>Email Address</span></label>
+        <input name="email" id="email" title="Email" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"  value="" />
+        <div id="msg"></div>
+    </form>
+</div>
+
+<script>
+require(
+[
+    'jquery',
+    'Magento_Ui/js/modal/modal'
+],
+function(
+    $,
+    modal
+) {
+    let options = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+        buttons: [{
+            text: $.mage.__('Subscribe'),
+            class: '',
+            click: function (data) {
+                        var form_data = jQuery("#subscribe_form").serialize();
+                        var email = jQuery("#email").val();
+                        var url = jQuery('#subscribe_form').attr('action');
+                        jQuery.ajax({
+                                dataType: "json",
+                                url: url,
+                                type: 'POST',
+                                data: {email : email},
+                                success: function(dataresult){
+                                    //console.log(dataresult);
+                                    $("#msg").html(dataresult.message);                                
+                                }
+                            });
+            }
+        }]
+    };
+    
+    let $myModal = $('#popup-modal');
+    let popup = modal(options, $myModal);
+    
+    //this opens the modal, you can use some click event or whatever you need to trigger the modal here
+    $myModal.modal('openModal');
+}
+);
+</script>
