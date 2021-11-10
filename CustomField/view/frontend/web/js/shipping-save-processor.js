@@ -27,6 +27,7 @@ define([
         saveShippingInformation: function() {
             var payload;
             var deliverytime = $('[name="custom_attributes[deliverytime]"]').val();
+            var delivery_date = $('[name="custom_attributes[delivery_date]"]').val();
             if(!quote.billingAddress()) {
                 selectBillingAddressAction(quote.shippingAddress());
             }
@@ -38,12 +39,14 @@ define([
                     shipping_method_code: quote.shippingMethod().method_code,
                     shipping_carrier_code: quote.shippingMethod().carrier_code,
                     extension_attributes: {
-                        deliverytime: deliverytime
+                        deliverytime: deliverytime,
+                        delivery_date : delivery_date
                     }
                 }
             };
 
             console.log(deliverytime);
+            console.log(delivery_date);
 
             fullScreenLoader.startLoader();
 

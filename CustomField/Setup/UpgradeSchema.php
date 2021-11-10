@@ -46,6 +46,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
                 ]
             );
+            //Order grid table
         $setup->getConnection()
         ->addColumn(
             $setup->getTable($orderGridTable),
@@ -56,6 +57,41 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'comment' =>'Delivery Time'
             ]
             );
+
+        //Quote address table delivery date
+        $setup->getConnection()
+            ->addColumn(
+                $setup->getTable($quoteAddressTable),
+                'delivery_date',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                    'nullable' => false,
+                    'comment' => 'Delivery Date'
+                ]
+            );
+        //Order address table
+        $setup->getConnection()
+            ->addColumn(
+                $setup->getTable($orderTable),
+                'delivery_date',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                    'nullable' => false,
+                    'comment' => 'Delivery Date'
+
+                ]
+            );
+        //Order grid table
+        $setup->getConnection()
+        ->addColumn(
+            $setup->getTable($orderGridTable),
+            'delivery_date',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                'nullable' => false,
+                'comment' => 'Delivery Date'
+            ]
+            );       
 
         $setup->endSetup();
     }

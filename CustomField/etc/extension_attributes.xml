@@ -2,9 +2,11 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Magento\Checkout\Api\Data\ShippingInformationInterface">
         <attribute code="deliverytime" type="string"/>
+        <attribute code="delivery_date" type="string"/>
     </extension_attributes>
     <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
         <attribute code="deliverytime" type="string"/>
+        <attribute code="delivery_date" type="string"/>
     </extension_attributes>
     <!--<extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
         <attribute code="deliverytime" type="string"/>

@@ -15,6 +15,7 @@ define([
 
             // you can extract value of extension attribute from any place (in this example I use customAttributes approach)
             shippingAddress['extension_attributes']['deliverytime'] = shippingAddress.customAttributes['deliverytime'];
+            shippingAddress['extension_attributes']['delivery_date'] = shippingAddress.customAttributes['delivery_date'];
             // pass execution to original action ('Magento_Checkout/js/action/set-shipping-information')
             return originalAction();
         });

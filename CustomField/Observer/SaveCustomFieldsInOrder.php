@@ -8,7 +8,7 @@ class SaveCustomFieldsInOrder implements \Magento\Framework\Event\ObserverInterf
         $quote = $observer->getEvent()->getQuote();
 
         $order->setData('deliverytime', $quote->getDeliverytime());
-
+        $order->setData('delivery_date', $quote->getDeliveryDate());
         return $this;
     }
 }

@@ -31,6 +31,26 @@ class LayoutProcessor
             'id' => 'deliverytime'
         ];
 
+        $customDateCode = 'delivery_date';
+        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+        ['shippingAddress']['children']['shipping-address-fieldset']['children'][$customDateCode] = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'customScope' => 'shippingAddress.custom_attributes',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/date',
+                'options' => [],
+                'id' => 'delivery_date'
+            ],
+            'dataScope' => 'shippingAddress.custom_attributes' . '.' . $customDateCode,
+            'label' => 'Delivery Date',
+            'provider' => 'checkoutProvider',
+            'visible' => true,
+            'validation' => [],
+            'sortOrder' => 302,
+            'id' => 'delivery_date'
+        ];
+
         return $jsLayout;
     }
 

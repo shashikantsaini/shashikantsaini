@@ -25,5 +25,6 @@ class ShippingInformationManagementPlugin
         $quote = $this->quoteRepository->getActive($cartId);
 
         $quote->setDeliverytime($extAttributes->getDeliverytime());
+        $quote->setDeliveryDate($extAttributes->getDeliveryDate());
     }
 }
