@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <custompaymethod>
+                <payment_action>authorize</payment_action><!-- You can use another methor like capture  -->
+                <model>Bluethink\CustomPayMethod\Model\CustomPayMethod</model>
+                <active>1</active>
+                <title>New Pay Method</title>
+                <order_status>pending_payment</order_status><!-- set default order status-->
+            </custompaymethod>
+        </payment>
+    </default>
+</config>
