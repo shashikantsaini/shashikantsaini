@@ -26,5 +26,6 @@ class ShippingInformationManagementPlugin
 
         $quote->setDeliverytime($extAttributes->getDeliverytime());
         $quote->setDeliveryDate($extAttributes->getDeliveryDate());
+        return;
     }
 }
