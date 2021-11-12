@@ -6,6 +6,12 @@
     <type name="Magento\Checkout\Model\ShippingInformationManagement">
         <plugin name="save-in-quote" type="Bluethink\CustomField\Plugin\Quote\ShippingInformationManagementPlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\Quote\Model\BillingAddressManagement">
+        <plugin name="save-in-billingquote" type="Bluethink\CustomField\Plugin\Quote\BillingAddressManagementPlugin" sortOrder="20"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\BillingAddressPersister">
+        <plugin disabled="false" name="BillingAddressSave" sortOrder="30" type="Bluethink\CustomField\Plugin\Quote\Model\BillingAddressPersister"/>
+    </type>
     <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
         <arguments>
             <argument name="columns" xsi:type="array">

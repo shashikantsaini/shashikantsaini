@@ -11,7 +11,7 @@ class LayoutProcessor
     ) {
 
         $customAttributeCode = 'deliverytime';
-
+        //Adding Field to Shiping Address form
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingAddress']['children']['shipping-address-fieldset']['children'][$customAttributeCode] = [
             'component' => 'Magento_Ui/js/form/element/abstract',
@@ -51,33 +51,32 @@ class LayoutProcessor
             'id' => 'delivery_date'
         ];
 
-
+        //Adding Field to Billing Address form
         $configuration = $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']['payment']['children']['payments-list']['children'];
-        foreach ($configuration as $paymentGroup => $groupConfig) 
-        {
-            if (isset($groupConfig['component']) AND $groupConfig['component'] === 'Magento_Checkout/js/view/billing-address') 
-            {
+        foreach ($configuration as $paymentGroup => $groupConfig) {
+            if (isset($groupConfig['component']) AND $groupConfig['component'] === 'Magento_Checkout/js/view/billing-address') {
+
                 $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
                 ['payment']['children']['payments-list']['children'][$paymentGroup]['children']['form-fields']['children']['alternate_no'] = [
                     'component' => 'Magento_Ui/js/form/element/abstract',
                     'config' => [
+                        'customScope' => 'billingAddress.custom_attributes',
                         'template' => 'ui/form/field',
                         'elementTmpl' => 'ui/form/element/input',
-                        'id' => 'alternate_no',
+                        'options' => [],
+                        'id' => 'alternate_no'
                     ],
-                    'dataScope' => $groupConfig['dataScopePrefix'] . '.alternate_no',
-                    'label' => __('Alternate Number'),
+                    'dataScope' => 'billingAddress.custom_attributes.alternate_no',
+                    'label' => 'Alternate No',
                     'provider' => 'checkoutProvider',
                     'visible' => true,
-                    'validation' => [
-                        'required-entry' => true,
-                        'min_text_length' => 0,
-                    ],
-                    'sortOrder' => 300,
+                    'validation' => [],
+                    'sortOrder' => 250,
                     'id' => 'alternate_no'
                 ];
             }
         }
+
 
         return $jsLayout;
     }
