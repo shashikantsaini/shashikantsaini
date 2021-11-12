@@ -280,7 +280,7 @@
                 </item>
             </argument>
         </column>
-		 <column name="delivery_day">
+		 <column name="delivery_date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">
@@ -290,7 +290,7 @@
                         name="label"
                         xsi:type="string"
                         translate="true">
-                        Delivery Day
+                        Delivery Date
                     </item>
                 </item>
             </argument>

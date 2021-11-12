@@ -23,7 +23,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $orderTable = 'sales_order';
         $orderGridTable = 'sales_order_grid';
 
-        //Quote address table
+        //Quote table
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($quoteAddressTable),
@@ -34,7 +34,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'comment' =>'Delivery Time'
                 ]
             );
-        //Order address table
+        //Order table
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($orderTable),
@@ -58,7 +58,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             ]
             );
 
-        //Quote address table delivery date
+        //Quote table delivery date
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($quoteAddressTable),
@@ -69,7 +69,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'comment' => 'Delivery Date'
                 ]
             );
-        //Order address table
+        //Order table
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($orderTable),
@@ -92,7 +92,27 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'comment' => 'Delivery Date'
             ]
             );       
-
+            
+        $setup->getConnection()
+        ->addColumn(
+            $setup->getTable('sales_order_address'),
+            'alternate_no',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BIGINT,
+                'nullable' => false,
+                'comment' => 'Alternate Number'
+            ]
+            );    
+        $setup->getConnection()
+        ->addColumn(
+            $setup->getTable('quote_address'),
+            'alternate_no',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BIGINT,
+                'nullable' => false,
+                'comment' => 'Alternate Number'
+            ]
+            );    
         $setup->endSetup();
     }
 }
