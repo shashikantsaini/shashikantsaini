@@ -51,32 +51,6 @@ class LayoutProcessor
             'id' => 'delivery_date'
         ];
 
-        //Adding Field to Billing Address form
-        $configuration = $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']['payment']['children']['payments-list']['children'];
-        foreach ($configuration as $paymentGroup => $groupConfig) {
-            if (isset($groupConfig['component']) AND $groupConfig['component'] === 'Magento_Checkout/js/view/billing-address') {
-
-                $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
-                ['payment']['children']['payments-list']['children'][$paymentGroup]['children']['form-fields']['children']['alternate_no'] = [
-                    'component' => 'Magento_Ui/js/form/element/abstract',
-                    'config' => [
-                        'customScope' => 'billingAddress.custom_attributes',
-                        'template' => 'ui/form/field',
-                        'elementTmpl' => 'ui/form/element/input',
-                        'options' => [],
-                        'id' => 'alternate_no'
-                    ],
-                    'dataScope' => 'billingAddress.custom_attributes.alternate_no',
-                    'label' => 'Alternate No',
-                    'provider' => 'checkoutProvider',
-                    'visible' => true,
-                    'validation' => [],
-                    'sortOrder' => 250,
-                    'id' => 'alternate_no'
-                ];
-            }
-        }
-
 
         return $jsLayout;
     }
