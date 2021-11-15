@@ -1,6 +1,4 @@
 <?php
-
-echo "This is Custom tab in product detail page\n";
-echo $this->helper('Magento\Catalog\Helper\Output')->productAttribute($block->getProduct(), $block->getProduct()->getManufacturer(), 'manufacturer');
-
+echo "<b>Manufacturer</b> = ".$block->getProductdetail("manufacturer")."<br>";
+echo "<b>Packers</b> = ".$block->getProductdetail("packers")."<br>";
 ?>

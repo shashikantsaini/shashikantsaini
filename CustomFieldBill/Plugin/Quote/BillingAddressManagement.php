@@ -1,10 +1,13 @@
 <?php
-namespace Bluethink\CustomField\Plugin\Quote\Model;
 
-class BillingAddressPersister
+namespace Bluethink\CustomFieldBill\Plugin\Quote;
+
+class BillingAddressManagement
 {
 
     protected $logger;
+
+    protected $quoteRepository;
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger
@@ -12,14 +15,13 @@ class BillingAddressPersister
         $this->logger = $logger;
     }
 
-    public function beforeSave(
-        \Magento\Quote\Model\Quote\Address\BillingAddressPersister $subject,
-        $quote,
+    public function beforeAssign(
+        \Magento\Quote\Model\BillingAddressManagement $subject,
+        $cartId,
         \Magento\Quote\Api\Data\AddressInterface $address,
         $useForShipping = false
     ) {
-
-        $extAttributes = $address->getExtensionAttributes();
+        $extAttributes = $address->getExtensionAttributes();        
         if (!empty($extAttributes)) {
             try {
                 $address->setAlternateNo($extAttributes->getAlternateNo());
@@ -28,4 +30,4 @@ class BillingAddressPersister
             }
         }
     }
-}   
+}
