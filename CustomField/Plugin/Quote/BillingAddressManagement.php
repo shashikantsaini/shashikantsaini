@@ -1,6 +1,6 @@
 <?php
 
-namespace Bluethink\CustomFieldBill\Plugin\Quote;
+namespace Bluethink\CustomField\Plugin\Quote;
 
 class BillingAddressManagement
 {

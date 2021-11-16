@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
-        <plugin name="bluethink_add_custom_fields" type="Bluethink\CustomFieldBill\Plugin\Checkout\LayoutProcessor" sortOrder="100"/>
-    </type>
-    <type name="Magento\Quote\Model\BillingAddressManagement">
-        <plugin name="save-in-billingquote" type="Bluethink\CustomFieldBill\Plugin\Quote\BillingAddressManagement" sortOrder="20"/>
-    </type>
-</config>

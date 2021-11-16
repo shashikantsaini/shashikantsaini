@@ -6,11 +6,15 @@
     <type name="Magento\Checkout\Model\ShippingInformationManagement">
         <plugin name="save-in-quote" type="Bluethink\CustomField\Plugin\Quote\ShippingInformationManagementPlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\Quote\Model\BillingAddressManagement">
+        <plugin name="save-in-billingquote" type="Bluethink\CustomField\Plugin\Quote\BillingAddressManagement" sortOrder="20"/>
+    </type>
     <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
         <arguments>
             <argument name="columns" xsi:type="array">
                 <item name="deliverytime" xsi:type="string">sales_order.deliverytime</item>
                 <item name="delivery_date" xsi:type="string">sales_order.delivery_date</item>
+                <item name="alternate_no" xsi:type="string">sales_order_address.alternate_no</item>
             </argument>
         </arguments>
     </virtualType>

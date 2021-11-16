@@ -91,7 +91,28 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'nullable' => false,
                 'comment' => 'Delivery Date'
             ]
-            );       
+            ); 
+            
+        $setup->getConnection()
+        ->addColumn(
+            $setup->getTable('sales_order_address'),
+            'alternate_no',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BIGINT,
+                'nullable' => false,
+                'comment' => 'Alternate Number'
+            ]
+            );    
+        $setup->getConnection()
+        ->addColumn(
+            $setup->getTable('quote_address'),
+            'alternate_no',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BIGINT,
+                'nullable' => false,
+                'comment' => 'Alternate Number'
+            ]
+            );    
         $setup->endSetup();
     }
 }

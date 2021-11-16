@@ -8,4 +8,7 @@
         <attribute code="deliverytime" type="string"/>
         <attribute code="delivery_date" type="string"/>
     </extension_attributes>
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+		<attribute code="alternate_no" type="string"/>
+	</extension_attributes>
 </config>
