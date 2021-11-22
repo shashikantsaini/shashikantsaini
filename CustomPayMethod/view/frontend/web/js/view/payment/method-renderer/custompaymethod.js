@@ -8,6 +8,9 @@ define(
         return Component.extend({
             defaults: {
                 template: 'Bluethink_CustomPayMethod/payment/custompaymethod'
+            },
+            getMailingAddress: function () {
+                return window.checkoutConfig.payment.checkmo.mailingAddress;
             }
         });
     }
