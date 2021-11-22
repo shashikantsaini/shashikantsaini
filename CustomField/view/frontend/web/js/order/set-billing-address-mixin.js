@@ -8,7 +8,7 @@ define([
     return function (setBillingAddressAction) {
         
         return wrapper.wrap(setBillingAddressAction, function (originalAction, messageContainer) {
-
+            
             var billingAddress = quote.billingAddress();
 
             if(billingAddress != undefined) {
@@ -22,7 +22,6 @@ define([
                         if($.isPlainObject(value)){
                             value = value['value'];
                         }
-                        alert("Extession Attribute");
                         console.log(value);
                         billingAddress['extension_attributes']['alternate_no'] = value;
                     });
