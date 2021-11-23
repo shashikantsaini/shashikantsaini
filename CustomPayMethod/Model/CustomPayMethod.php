@@ -12,4 +12,5 @@ class CustomPayMethod extends \Magento\Payment\Model\Method\AbstractMethod
      */
     protected $_canAuthorize = true;
 
+    protected $_isOffline = true;
 }
