@@ -2,7 +2,8 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">duplicate_product.duplicate_product_data_source</item>        </item>
+            <item name="provider" xsi:type="string">duplicate_product.duplicate_product_data_source</item>
+        </item>
         <item name="label" xsi:type="string" translate="true">Product Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
         <item name="config" xsi:type="array">
@@ -37,10 +38,10 @@
             </item>
         </argument>
     </dataSource>
-    <fieldset name="products">
+    <fieldset name="general">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
                 <item name="label" xsi:type="string" translate="true">Product Details</item>
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
