@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Bluethink_Quote::quotemenu"
+             title="Quote"
+             module="Bluethink_Quote"
+             sortOrder="1"
+             parent="Magento_Sales::sales_operation"
+             action="quote/quote/index"
+             resource="Bluethink_Quote::quote"
+        />
+    </menu>
+</config>

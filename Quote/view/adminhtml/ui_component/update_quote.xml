@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">update_quote.update_quote_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Quote Detail</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">update_quote</item>
+        </item>        
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Bluethink\Quote\Block\Adminhtml\Form\SaveButton"/>
+            <button name="back" class="Bluethink\Quote\Block\Adminhtml\Form\BackButton"/>
+        </buttons>
+        <deps>
+            <dep>update_quote.update_quote_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="update_quote_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Bluethink\Quote\Ui\Component\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">update_quote_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">quote_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Quote Details</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <field name="quote_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="label" xsi:type="string" translate="true">Quote ID :</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field name="group">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Bluethink\Quote\Model\Source\ItemSku</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" translate="true" xsi:type="string">Quote Items</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                </item>
+            </argument>
+        </field>
+        <button name="delete_item">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="buttonClasses" xsi:type="string">custom-button-class</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">TARGET_NAME</item>
+                            <item name="actionName" xsi:type="string">ACTION_NAME</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <displayAsLink>false</displayAsLink>
+                <title translate="true">Delete Item(s)</title>
+            </settings>
+        </button>
+        <button name="add_item">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="buttonClasses" xsi:type="string">custom-button-class</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">TARGET_NAME</item>
+                            <item name="actionName" xsi:type="string">ACTION_NAME</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <displayAsLink>false</displayAsLink>
+                <title translate="true">Add Item(s)</title>
+            </settings>
+        </button>
+    </fieldset>
+</form>
