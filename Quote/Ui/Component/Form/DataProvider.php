@@ -1,7 +1,7 @@
 <?php
 namespace Bluethink\Quote\Ui\Component\Form;
  
-use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory;
+use Magento\Quote\Model\ResourceModel\Quote\CollectionFactory;
  
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
@@ -10,7 +10,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
-     * @param CollectionFactory $employeeCollectionFactory
+     * @param CollectionFactory $itemCollectionFactory
      * @param array $meta
      * @param array $data
      */
@@ -38,9 +38,9 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         }
         $items = $this->collection->getItems();
     
-        foreach ($items as $stdimg) {            
-            $data = $stdimg->getData();          
-            $this->_loadedData[$stdimg->getQuoteId()] = $data;     
+        foreach ($items as $itemData) {            
+            $data = $itemData->getData();      
+            $this->_loadedData[$itemData->getEntityId()] = $data;     
         }
         return $this->_loadedData;
     }

@@ -24,7 +24,7 @@
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Bluethink\Quote\Ui\Component\Form\DataProvider</argument>
             <argument name="name" xsi:type="string">update_quote_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">quote_id</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -46,11 +46,35 @@
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
         </argument>
-        <field name="quote_id" formElement="input">
+        <field name="entity_id" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">data</item>
                     <item name="label" xsi:type="string" translate="true">Quote ID :</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field name="customer_email" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="label" xsi:type="string" translate="true">Email :</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field name="grand_total" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="label" xsi:type="string" translate="true">Grand Total :</item>
                 </item>
             </argument>
             <settings>
@@ -63,11 +87,11 @@
                 <item name="options" xsi:type="object">Bluethink\Quote\Model\Source\ItemSku</item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" translate="true" xsi:type="string">Quote Items</item>
+                    <item name="label" translate="true" xsi:type="string">Quote Items :</item>
                     <item name="formElement" xsi:type="string">multiselect</item>
                 </item>
             </argument>
-        </field>
+        </field>    
         <button name="delete_item">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
