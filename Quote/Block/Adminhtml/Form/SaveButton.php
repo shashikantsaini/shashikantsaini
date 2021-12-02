@@ -9,12 +9,12 @@ class SaveButton implements ButtonProviderInterface {
   {
     return [
       'label' => __('Delete Items'),
-      'class' => 'save primary',
+      'class' => 'action secondary',
       'data_attribute' => [
           'mage-init' => ['button' => ['event' => 'save']],
           'form-role' => 'save',
       ],
-      'sort_order' => 90,
+      'sort_order' => 20,
     ];
   }
 }

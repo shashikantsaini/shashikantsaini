@@ -1,35 +1,36 @@
 <?php
 
-
 namespace Bluethink\Quote\Controller\Adminhtml\Quote;
 
 use Magento\Quote\Model\Quote\Item ;
+use Magento\Quote\Model\QuoteFactory ;
 
 class Save extends \Magento\Backend\App\Action
 {
 
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        Item $quoteItem
+        Item $quoteItem,
+        QuoteFactory $quoteFactory
     ) {
         parent::__construct($context);
-        $this->quoteItem=$quoteItem;;
+        $this->quoteItem=$quoteItem;
+        $this->quoteFactory=$quoteFactory;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
-     */
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
         $itemId = $this->getRequest()->getParam('sku');
+        $quoteId = $this->getRequest()->getParam('entity_id');
+        $quote = $this->quoteFactory->create()->load($quoteId);
         // echo "<pre>";
         // print_r($itemId);
-        // print_r($data);
+        // print_r(get_class_methods($quote));
         // die();
+
         if (!$data) {
-            $this->_redirect('quote/quote/index');
+            $this->_redirect('*/*/index');
             return;
         }
 
@@ -39,11 +40,12 @@ class Save extends \Magento\Backend\App\Action
                 $quoteItem=$this->quoteItem->load($item);
                 $quoteItem->delete();
                 $quoteItem->save();
+                $quote->collectTotals()->save();
             }   
             $this->messageManager->addSuccess(__('Items has been successfully deleted.'));
         } catch (\Exception $e) {
             $this->messageManager->addError(__($e->getMessage()));
         }
-        $this->_redirect('quote/quote/update');
+        $this->_redirect('*/*/update');
     }
 }

@@ -103,6 +103,12 @@
                 </item>
             </argument>
         </column>
+        <column name="grand_total" class="Magento\Sales\Ui\Component\Listing\Column\PurchasedPrice">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Grand Total</label>
+            </settings>
+        </column>
         <column name="is_active">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

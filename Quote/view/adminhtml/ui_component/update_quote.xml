@@ -9,13 +9,23 @@
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
             <item name="namespace" xsi:type="string">update_quote</item>
-        </item>        
+        </item> 
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add Items</item>
+                <item name="class" xsi:type="string">action-secondary</item>
+                <item name="url" xsi:type="string">*/*/add</item>
+            </item>
+        </item>      
     </argument>
     <settings>
         <buttons>
             <button name="save" class="Bluethink\Quote\Block\Adminhtml\Form\SaveButton"/>
             <button name="back" class="Bluethink\Quote\Block\Adminhtml\Form\BackButton"/>
+            <button name="order" class="Bluethink\Quote\Block\Adminhtml\Form\OrderButton"/>
         </buttons>
+        <dataScope>data</dataScope>
         <deps>
             <dep>update_quote.update_quote_data_source</dep>
         </deps>
@@ -29,6 +39,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                    <item name="update_url" xsi:type="url" path="*/*/add"/>
                 </item>
             </argument>
         </argument>
