@@ -46,6 +46,6 @@ class Save extends \Magento\Backend\App\Action
         } catch (\Exception $e) {
             $this->messageManager->addError(__($e->getMessage()));
         }
-        $this->_redirect('*/*/update');
+        $this->_redirect('*/*/update',['id' => $quoteId]);
     }
 }

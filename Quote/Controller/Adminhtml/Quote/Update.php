@@ -28,7 +28,7 @@ class Update extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $quoteId = $this->getRequest()->getParam('id');
+        $quoteId = $this->getQuoteId();
         $quoteData = $this->quoteFactory->create();
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         if ($quoteId) {
