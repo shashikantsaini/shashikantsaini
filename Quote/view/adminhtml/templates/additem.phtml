@@ -1,0 +1,60 @@
+<?php
+// print_r($_POST);
+// echo "shashi";
+// echo $block->getQuoteId();
+// echo "<pre>";
+// foreach ($productCollection as $product) {
+//     print_r($product->getData());     
+//     echo "<br>";
+// }
+?>
+<style>
+table {  font-family: arial, sans-serif;  border-collapse: collapse;  width: 100%;  margin-top: 30px;}
+th {  background-color: #444444; color: #ffffff  }
+td, th {  border: 1px solid #dddddd;  text-align: left;  padding: 8px;  }
+</style>
+<form action="<?php echo $this->getUrl("quote/quote/additem");?>" method="POST" >
+  <div><input name="form_key" type="hidden" value="<?php echo $block->getFormKey();?>" /></div>
+  <div><input name="quote_id" type="hidden" value="<?php echo $block->getQuoteId();?>" /></div>
+  <table>
+    <tr>
+      <th class="entity_id">ID</th>
+      <th class="name">Product</th>
+      <th class="sku">SKU</th>
+      <th class="price">Price</th>
+      <th class="address">Select</th>
+      <th class="qty">Quantity</th>
+    </tr>
+      <?php
+          $productCollection = $block->getProductCollection();
+          foreach ($productCollection as $product)
+          {            
+            echo '<tr>
+                    <td>'.$product->getEntityId().'</td>
+                    <td>'.$product->getName().'</td>
+                    <td>'.$product->getSku().'</td>
+                    <td>'.$product->getPrice().'</td>
+                    <td><input type="checkbox" id="product_id" name="product_id[]" value="'.$product->getEntityId().'"/></td>
+                    <td><input type="text" id="product_qty" name="product_qty['.$product->getEntityId().']" value="" size="1" /></td>
+                  </tr>';
+          }
+      ?>
+      <tr><td rowspan="2"><input type="submit" id="additem" name="additem" value="ADD ITEM" /></td></tr>
+  </table>
+</form>
+<!-- <script type="text/javascript">
+require(['jquery', 'jquery/ui'], function($){
+  $(document).ready( function() {
+    $('#product_id').change(function(){
+    $("#product_qty").prop("disabled", !$(this).is(':checked'));
+    });
+  });
+});
+// require(['jquery','bannerslider'],function($){
+//   $(document).ready(function(){
+//     $('#product_id').change(function(){
+//     $("#product_qty").prop("disabled", !$(this).is(':checked'));
+//     });
+//   });
+// });
+</script> -->
