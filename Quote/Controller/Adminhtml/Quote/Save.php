@@ -20,6 +20,8 @@ class Save extends \Magento\Backend\App\Action
 
     public function execute()
     {
+        print_r($_POST);
+        die("Shsi");
         $data = $this->getRequest()->getPostValue();
         $itemId = $this->getRequest()->getParam('sku');
         $quoteId = $this->getRequest()->getParam('entity_id');

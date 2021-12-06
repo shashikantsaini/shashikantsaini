@@ -27,10 +27,7 @@ class Add extends \Magento\Backend\App\Action
 
     public function execute()
     {
-        $quoteId = $this->getRequest()->getParam('id');
-        // // echo "<pre>";
-        // // print_r($quoteId);
-        // // die("Shasi124");
+        $quoteId = $this->getRequest()->getParam('id');        
         $this->coreRegistry->register('quote_id', $quoteId);
         $page = $this->pageFactory->create();
         $page->getConfig()->getTitle()->prepend('Add Item(s)');

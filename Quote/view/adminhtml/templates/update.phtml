@@ -1,0 +1,157 @@
+<?php 
+$items = $block->getItems();
+$quoteData = $block->getQuote();
+
+?>
+<html>
+<head>
+<style>
+table {  
+    font-family: arial, sans-serif;  
+    border-collapse: collapse;  
+    width: 100%;  
+    margin-top: 10px;
+}
+td {  
+    border: 1px solid #dddddd;  
+    text-align: left;  
+    padding: 8px;  
+}
+.update {
+    margin: auto;
+    width: 70%;
+    border: 3px solid #000000;
+    padding: 10px;
+}
+#deleteitem {
+  background-color: #FF0000;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#additem {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#placeorder {
+  background-color: #FFA500;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#back {
+  background-color: #444444;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 0px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<form id="frm" name="frm" action="" method="POST" >
+  <div><input name="form_key" type="hidden" value="<?php echo $block->getFormKey();?>" /></div>
+  <div><input name="quote_id" type="hidden" value="<?php echo $block->getQuoteId();?>" /></div>
+    <div class="update">
+        <table>
+            <!-- <tr><td colspan="2"><button id="back" name="back" style="float: right;" onclick="backurl()">Back</button></td></tr> -->
+            <tr><td>Quote ID :</td><td><input type="text" name="quote_id_print" value="<?php echo $block->getQuoteId();?>" size="10" disabled="1"></td></tr>
+            <tr><td>Email :</td><td><input type="text" name="email" value="<?php echo $quoteData->getCustomerEmail(); ?>" size="30" disabled="1"></td></tr>
+            <tr><td>Grand Total :</td><td><input type="text" name="email" value="<?php echo $quoteData->getSubtotalWithDiscount(); ?>" size="10" disabled="1"></td></tr>
+            <tr><td>Quote Item(s) :</td><td><select name="quote_item[]" id="quote_item" multiple>
+                                            <option value=""></option>
+                                            <?php foreach($items as $x)
+                                                    {
+                                                        if($x->getParentItemId() == null)
+                                                        {?>
+                                                            <option value="<?php echo $x->getItemId();?>"><?php echo $x->getSku(); ?></option><?php
+                                                        }
+                                                    }?>
+                                            </select></td>
+            <tr><td colspan="2"><input type="submit" id="deleteitem" name="deleteitem" value="Delete Item(s)" />
+                                <input type="submit" id="additem" name="additem" value="Add Item(s)" />
+                                <input type="submit" id="placeorder" name="placeorder" value="Place Order" />
+            </td></tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
+
+
+<script type="text/javascript">
+require(['jquery', 'jquery/ui'], function($){
+  $(document).ready( function() {
+    $('#deleteitem').click(function(e){
+        e.preventDefault();
+        alert("shahi");
+        var url = "<?php echo $this->getUrl("quote/quote/save");?>";
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: $('#frm').serialize(),
+            success: function (result) {
+                    console.log(result);
+            }
+        });
+    });
+    $('#additem').click(function(e){
+        e.preventDefault();
+        alert("Add");
+        var url = "<?php echo $this->getUrl("quote/quote/add");?>";
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: $('#frm').serialize(),
+            success: function (result) {
+                    console.log(result);
+            }
+        });
+    });
+    $('#placeorder').click(function(e){
+        e.preventDefault();
+        alert("Place");
+        var url = "<?php echo $this->getUrl("quote/quote/order");?>";
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: $('#frm').serialize(),
+            success: function (result) {
+                    console.log(result);
+            }
+        });
+    });
+  });
+});
+</script>

@@ -38,7 +38,6 @@ class Add extends Template
 
     public function getQuoteId()
     {
-        // will return 'bar'
         return $this->_coreRegistry->registry('quote_id');
     }
 

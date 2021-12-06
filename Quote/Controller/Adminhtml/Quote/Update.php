@@ -40,7 +40,7 @@ class Update extends \Magento\Backend\App\Action
            }
        }
 
-       $this->coreRegistry->register('quote_data', $quoteData);
+       $this->coreRegistry->register('quote_id', $quoteId);
        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
        $title = "Edit Quote Data";
        $resultPage->getConfig()->getTitle()->prepend($title);

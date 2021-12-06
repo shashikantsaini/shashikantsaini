@@ -36,12 +36,12 @@ class AddItem extends \Magento\Backend\App\Action
     public function execute()
     {
         $quoteId= $_POST['quote_id'];
-        $qty = array_filter($_POST['product_qty']);
+        $qtyarray = array_filter($_POST['product_qty']);
         try {
             // then load it
-            foreach($qty as $productId=>$productQty){  
-                $product = $this->productRepositoryInterface->getById($productId);       
-                // echo "Product Id: ".$productId.", Value : ".$productQty."\n"; 
+            foreach($qtyarray as $productId=>$productQty)
+            {  
+                $product = $this->productRepositoryInterface->getById($productId);
                 $cart = $this->quote->create()->loadActive($quoteId);    
                 $cart->addProduct($product, $productQty);   
                 $cart->save(); 
@@ -51,9 +51,6 @@ class AddItem extends \Magento\Backend\App\Action
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         }
-        // // echo "<pre>";
-        // // print_r($quoteId);
-        // // die("Shasi124");
         $this->_redirect('*/*/update',['id' => $quoteId]);
     }
 }
