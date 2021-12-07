@@ -94,7 +94,7 @@
                 <disabled>1</disabled>
             </settings>
         </field>
-        <field name="sku">
+        <field name="quote_item_id">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Bluethink\Quote\Model\Source\ItemSku</item>
                 <item name="config" xsi:type="array">

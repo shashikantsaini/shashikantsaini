@@ -34,6 +34,6 @@ class OrderButton extends Generic implements ButtonProviderInterface
     public function getOrderUrl()
     {
         $id = $this->context->getRequest()->getParam('id');
-        return $this->getUrl('*/*/order', ['id' => $id]);
+        return $this->getUrl('*/*/order', ['entity_id' => $id]);
     }
 }

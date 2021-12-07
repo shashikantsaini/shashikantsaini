@@ -39,22 +39,15 @@ td, th {  border: 1px solid #dddddd;  text-align: left;  padding: 8px;  }
                   </tr>';
           }
       ?>
-      <tr><td rowspan="2"><input type="submit" id="additem" name="additem" value="ADD ITEM" /></td></tr>
+      <tr><td colspan="6"><input type="submit" id="additem" name="additem" value="ADD ITEM" /></td></tr>
   </table>
 </form>
 <!-- <script type="text/javascript">
 require(['jquery', 'jquery/ui'], function($){
   $(document).ready( function() {
-    $('#product_id').change(function(){
-    $("#product_qty").prop("disabled", !$(this).is(':checked'));
+    $(':checkbox').change(function(){
+      $(this).siblings().hide();
     });
   });
 });
-// require(['jquery','bannerslider'],function($){
-//   $(document).ready(function(){
-//     $('#product_id').change(function(){
-//     $("#product_qty").prop("disabled", !$(this).is(':checked'));
-//     });
-//   });
-// });
 </script> -->

@@ -34,6 +34,6 @@ class AddButton extends Generic implements ButtonProviderInterface
     public function getAddUrl()
     {
         $id = $this->context->getRequest()->getParam('id');
-        return $this->getUrl('*/*/add', ['id' => $id]);
+        return $this->getUrl('*/*/add', ['entity_id' => $id]);
     }
 }

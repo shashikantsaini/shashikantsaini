@@ -49,7 +49,7 @@ class Update extends \Magento\Backend\App\Action
 
     public function getQuoteId()
     {
-        $quoteId = $this->getRequest()->getParam('id');
+        $quoteId = $this->getRequest()->getParam('quote_id');
         return $quoteId;
     }
 }

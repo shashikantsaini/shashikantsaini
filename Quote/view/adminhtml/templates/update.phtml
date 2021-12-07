@@ -1,6 +1,9 @@
 <?php 
 $items = $block->getItems();
 $quoteData = $block->getQuote();
+// echo "<pre>";
+// print_r($items->getData());
+
 
 ?>
 <html>
@@ -76,23 +79,24 @@ td {
 <body>
 <form id="frm" name="frm" action="" method="POST" >
   <div><input name="form_key" type="hidden" value="<?php echo $block->getFormKey();?>" /></div>
-  <div><input name="quote_id" type="hidden" value="<?php echo $block->getQuoteId();?>" /></div>
+  <div><input id="quote_id" name="quote_id" type="hidden" value="<?php echo $block->getQuoteId();?>" /></div>
     <div class="update">
         <table>
             <!-- <tr><td colspan="2"><button id="back" name="back" style="float: right;" onclick="backurl()">Back</button></td></tr> -->
             <tr><td>Quote ID :</td><td><input type="text" name="quote_id_print" value="<?php echo $block->getQuoteId();?>" size="10" disabled="1"></td></tr>
             <tr><td>Email :</td><td><input type="text" name="email" value="<?php echo $quoteData->getCustomerEmail(); ?>" size="30" disabled="1"></td></tr>
             <tr><td>Grand Total :</td><td><input type="text" name="email" value="<?php echo $quoteData->getSubtotalWithDiscount(); ?>" size="10" disabled="1"></td></tr>
-            <tr><td>Quote Item(s) :</td><td><select name="quote_item[]" id="quote_item" multiple>
+            <tr><td>Quote Item(s) :</td><td><select style="width:500px" name="quote_item_id[]" id="quote_item_id" multiple>
                                             <option value=""></option>
                                             <?php foreach($items as $x)
                                                     {
                                                         if($x->getParentItemId() == null)
                                                         {?>
-                                                            <option value="<?php echo $x->getItemId();?>"><?php echo $x->getSku(); ?></option><?php
+                                                            <option value="<?php echo $x->getItemId();?>"><?php echo $x->getSku()." - ".$x->getQty(); ?></option><?php
                                                         }
                                                     }?>
                                             </select></td>
+            <tr><td>Apply Coupon Code :</td><td><input type="text" id="coupon_code" name="coupon_code" value=""/><input type="submit" id="apply_coupon" name="apply_coupon" value="Apply Coupon Code" /></td></tr>
             <tr><td colspan="2"><input type="submit" id="deleteitem" name="deleteitem" value="Delete Item(s)" />
                                 <input type="submit" id="additem" name="additem" value="Add Item(s)" />
                                 <input type="submit" id="placeorder" name="placeorder" value="Place Order" />
@@ -102,14 +106,17 @@ td {
 </form>
 </body>
 </html>
+<div class="add">
+<?php echo $this->getLayout()->createBlock("Bluethink\Quote\Block\Adminhtml\Action\Add")->setTemplate("Bluethink_Quote::additem.phtml")->toHtml() ?>
+</div>
 
 
 <script type="text/javascript">
 require(['jquery', 'jquery/ui'], function($){
   $(document).ready( function() {
+    $('.add').hide();
     $('#deleteitem').click(function(e){
         e.preventDefault();
-        alert("shahi");
         var url = "<?php echo $this->getUrl("quote/quote/save");?>";
         
         $.ajax({
@@ -119,36 +126,46 @@ require(['jquery', 'jquery/ui'], function($){
             data: $('#frm').serialize(),
             success: function (result) {
                     console.log(result);
+                    $('#quote_item_id option:selected').each(function () {
+                        $(this).remove();
+                    });
+                    location.reload(true); 
             }
         });
     });
     $('#additem').click(function(e){
         e.preventDefault();
-        alert("Add");
-        var url = "<?php echo $this->getUrl("quote/quote/add");?>";
-        
-        $.ajax({
-            type: "POST",
-            url: url,
-            dataType: "json",
-            data: $('#frm').serialize(),
-            success: function (result) {
-                    console.log(result);
-            }
-        });
+        $('.add').toggle(1000);
+        // window.location.href = url;
     });
     $('#placeorder').click(function(e){
         e.preventDefault();
         alert("Place");
         var url = "<?php echo $this->getUrl("quote/quote/order");?>";
-        
+        var url_a = "<?php echo $this->getUrl("quote/quote/index");?>";
         $.ajax({
             type: "POST",
             url: url,
             dataType: "json",
             data: $('#frm').serialize(),
             success: function (result) {
+                    alert(result.message);
                     console.log(result);
+                    window.location.href = url_a;
+            }
+        });
+    });
+    $('#apply_coupon').click(function(e){
+        e.preventDefault();
+        var url = "<?php echo $this->getUrl("quote/quote/coupon");?>";
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: $('#frm').serialize(),
+            success: function (result) {  
+                    location.reload(true); 
             }
         });
     });

@@ -16,6 +16,7 @@ class Order extends \Magento\Backend\App\Action
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Sales\Model\Order\Email\Sender\OrderSender $orderSender,
+        \Magento\Framework\Controller\Result\JsonFactory $jsonResultFactory,
         Item $quoteItem,
         QuoteFactory $quoteFactory,
         QuoteManagement $quoteManagement
@@ -29,14 +30,15 @@ class Order extends \Magento\Backend\App\Action
         $this->storeManager = $storeManager;
         $this->customerRepository = $customerRepository;
         $this->orderSender = $orderSender;
+        $this->jsonResultFactory = $jsonResultFactory;
     }
 
     public function execute()
-    {
+    {        
         $store = $this->storeManager->getStore();
         $storeId = $store->getStoreId();
         $websiteId = $this->storeManager->getStore()->getWebsiteId();
-        $quoteId = $this->getRequest()->getParam('id');
+        $quoteId = $this->getRequest()->getParam('quote_id');
         $quote = $this->quoteFactory->create()->load($quoteId);
         $quote->setStore($store);
         $customer = $this->customerFactory->create();
@@ -76,9 +78,14 @@ class Order extends \Magento\Backend\App\Action
             $increment_id = $order->getRealOrderId();
             $this->_checkoutSession->setLastOrderId($order->getId())->setLastRealOrderId($order->getIncrementId());
             $msg= sprintf('Order has been successfully Placed with Order Id: %s.', $increment_id);
-            $this->messageManager->addSuccess(__($msg));
+            $result = $this->jsonResultFactory->create();
+            $result->setData(['status'=>200,'message'=>$msg]);
+            return $result;
+            // $this->messageManager->addSuccess(__($msg));
         } catch (\Exception $e) {
             $this->messageManager->addError(__($e->getMessage()));
+            $result->setData(['status'=>201,'message'=>'Order not createdhave some issue']);
+            return $result;
         }
         $this->_redirect('quote/quote/index');
     }

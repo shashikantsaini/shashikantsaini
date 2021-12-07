@@ -2,10 +2,6 @@
 
 namespace Bluethink\Quote\Controller\Adminhtml\Quote;
 
-use Magento\Quote\Model\Quote\Item ;
-use Magento\Quote\Model\QuoteFactory ;
-use Magento\Quote\Model\QuoteManagement ;
-use Magento\Framework\App\ResponseInterface ;
 use Magento\Framework\View\Result\PageFactory ;
 
 class Add extends \Magento\Backend\App\Action
@@ -27,7 +23,7 @@ class Add extends \Magento\Backend\App\Action
 
     public function execute()
     {
-        $quoteId = $this->getRequest()->getParam('id');        
+        $quoteId = $this->getRequest()->getParam('quote_id');        
         $this->coreRegistry->register('quote_id', $quoteId);
         $page = $this->pageFactory->create();
         $page->getConfig()->getTitle()->prepend('Add Item(s)');

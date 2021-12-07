@@ -43,7 +43,7 @@ class Action extends Column
                     $item[$name]['update'] = [
                         'href' => $this->_urlBuilder->getUrl(
                             $this->_updateUrl, 
-                            ['id' => $item['entity_id']]
+                            ['quote_id' => $item['entity_id']]
                         ),
                         'label' => __('Update'),
                     ];
