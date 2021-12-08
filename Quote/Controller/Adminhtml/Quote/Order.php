@@ -78,13 +78,13 @@ class Order extends \Magento\Backend\App\Action
             $increment_id = $order->getRealOrderId();
             $this->_checkoutSession->setLastOrderId($order->getId())->setLastRealOrderId($order->getIncrementId());
             $msg= sprintf('Order has been successfully Placed with Order Id: %s.', $increment_id);
+            $this->messageManager->addSuccess(__($msg));
             $result = $this->jsonResultFactory->create();
             $result->setData(['status'=>200,'message'=>$msg]);
             return $result;
-            // $this->messageManager->addSuccess(__($msg));
         } catch (\Exception $e) {
             $this->messageManager->addError(__($e->getMessage()));
-            $result->setData(['status'=>201,'message'=>'Order not createdhave some issue']);
+            $result->setData(['status'=>201,'message'=>'Order not created have some issue']);
             return $result;
         }
         $this->_redirect('quote/quote/index');
