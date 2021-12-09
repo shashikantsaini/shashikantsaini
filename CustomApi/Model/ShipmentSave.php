@@ -2,9 +2,9 @@
 
 namespace Bluethink\CustomApi\Model;
 
-use Bluethink\CustomApi\Api\ShipmentSaveInterface;
+use Bluethink\CustomApi\Api\ShipmentInterface;
 
-class ShipmentSave implements ShipmentSaveInterface
+class Shipment implements ShipmentInterface
 {
     /*
     * @var string

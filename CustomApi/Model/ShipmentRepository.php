@@ -6,17 +6,17 @@ use Magento\Sales\Model\OrderFactory ;
 use Magento\Shipping\Model\ShipmentNotifier;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Sales\Api\OrderRepositoryInterface ;
+use Bluethink\CustomApi\Api\ShipmentRepositoryInterface ;
 use Bluethink\CustomApi\Api\ShipmentInterface ;
-use Bluethink\CustomApi\Api\ShipmentSaveInterface ;
 
-class Shipment implements ShipmentInterface
+class ShipmentRepository implements ShipmentRepositoryInterface
 {
     public function __construct(
         \Magento\Sales\Model\Convert\Order $convertOrder,
         OrderFactory $orderFactory,
         JsonFactory $jsonResultFactory,
         OrderRepositoryInterface $orderRepository,
-        ShipmentSaveInterface $shipmentSaveInterface,
+        ShipmentInterface $shipmentInterface,
         ShipmentNotifier $notifier
     )
     {
@@ -24,14 +24,14 @@ class Shipment implements ShipmentInterface
         $this->convertOrder = $convertOrder;
         $this->jsonResultFactory = $jsonResultFactory;
         $this->orderRepository = $orderRepository;
-        $this->shipmentSaveInterface = $shipmentSaveInterface;
+        $this->shipmentInterface = $shipmentInterface;
         $this->notifier = $notifier;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createShipment($orderId,$status, \Bluethink\CustomApi\Api\ShipmentSaveInterface $trackingInfo)
+    public function createShipment($orderId,$status, \Bluethink\CustomApi\Api\ShipmentInterface $trackingInfo)
     {
         echo $trackingInfo->getShippingLabel();
         echo $trackingInfo->getTrackingUrl();

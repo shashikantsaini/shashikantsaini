@@ -5,11 +5,28 @@ namespace Bluethink\CustomApi\Api;
 interface ShipmentInterface 
 {
     /**
-     * GET for Post api
-     * @param string $storeid
-     * @param string $name
-     * @param string $city
+     * GET Shipping Label
      * @return string
      */
-    public function createShipment( $orderid, $status, \Bluethink\CustomApi\Api\ShipmentSaveInterface $trackingInfo);
+    public function getShippingLabel();
+
+    /**
+     * SET Shipping Label
+     * @param int $shippingLabel
+     * @return string
+     */
+    public function setShippingLabel($shippingLabel);
+
+    /**
+     * GET Tracking Url
+     * @return string
+     */
+    public function getTrackingUrl();
+
+    /**
+     * SET Tracking Url
+     * @param int $trackingUrl
+     * @return string
+     */
+    public function setTrackingUrl($trackingUrl);
 }
