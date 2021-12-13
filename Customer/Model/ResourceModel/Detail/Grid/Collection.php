@@ -1,5 +1,5 @@
 <?php
-namespace Bluethink\Customer\Model\ResourceModel\Detail;
+namespace Bluethink\Customer\Model\ResourceModel\Detail\Grid;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {

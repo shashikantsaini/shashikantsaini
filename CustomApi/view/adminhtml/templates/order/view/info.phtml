@@ -1,0 +1,10 @@
+<?php
+$order = $block->getOrder();
+?>
+
+<h3><b> Shipping & Handling Information </b></h3>
+<a href="#"
+   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/shipping',['order_id'=> $order->getIncrementId()])?>","windowName":"ShippingDetail","width":700,"height":500,"top":0,"left":0,"resizable":1,"scrollbars":1}}'
+   title="<?php /* @escapeNotVerified */ echo __('Shipping Detail') ?>">
+    <span><?php /* @escapeNotVerified */ echo __('Shipping Detail') ?></span>
+</a>

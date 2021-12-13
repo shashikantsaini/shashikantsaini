@@ -6,10 +6,10 @@ interface ShipmentRepositoryInterface
 {
     /**
      * GET for Post api
-     * @param string $storeid
-     * @param string $name
-     * @param string $city
-     * @return string
+     * @param string $orderid
+     * @param string $status
+     * @param objects $trackingInfo
+     * @return Bluethink\CustomApi\Api\Response\ResponseInterface containing Tree objects
      */
     public function createShipment( $orderid, $status, \Bluethink\CustomApi\Api\ShipmentInterface $trackingInfo);
 }

@@ -83,6 +83,7 @@ class Order extends \Magento\Backend\App\Action
             $result->setData(['status'=>200,'message'=>$msg]);
             return $result;
         } catch (\Exception $e) {
+            $result = $this->jsonResultFactory->create();
             $this->messageManager->addError(__($e->getMessage()));
             $result->setData(['status'=>201,'message'=>'Order not created have some issue']);
             return $result;
