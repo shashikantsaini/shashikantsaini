@@ -1,10 +1,46 @@
 <?php
-$order = $block->getOrder();
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block \Magento\Sales\Block\Adminhtml\Order\AbstractOrder
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+
+/** @var \Magento\Shipping\Helper\Data $shippingHelper */
+$shippingHelper = $block->getData('shippingHelper');
+/** @var \Magento\Tax\Helper\Data $taxHelper */
+$taxHelper = $block->getData('taxHelper');
 ?>
+<?php 
+$order = $block->getOrder();
+if ($order->getIsVirtual()):
+    return '';
+endif; ?>
 
 <h3><b> Shipping & Handling Information </b></h3>
 <a href="#"
-   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/shipping',['order_id'=> $order->getIncrementId()])?>","windowName":"ShippingDetail","width":700,"height":500,"top":0,"left":0,"resizable":1,"scrollbars":1}}'
+   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/shipping',['order_id'=> $order->getIncrementId()])?>","windowName":"shippingDetail","width":500,"height":300,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
    title="<?php /* @escapeNotVerified */ echo __('Shipping Detail') ?>">
     <span><?php /* @escapeNotVerified */ echo __('Shipping Detail') ?></span>
 </a>
+<a href="#"
+   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/pdf',['order_id'=> $order->getIncrementId()])?>","windowName":"trackingUrl","width":700,"height":500,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
+   title="<?php /* @escapeNotVerified */ echo __('Tracking Url') ?>">
+    <span><?php /* @escapeNotVerified */ echo __('Tracking Url') ?></span>
+</a>
+<?php  if ($order->getTracksCollection()->count()): ?>
+            <p>
+                <a href="#" id="linkId" title="<?= $block->escapeHtmlAttr(__('Track Order')) ?>">
+                    <?= $block->escapeHtml(__('Track Order')) ?>
+                </a>
+            </p>
+            <?= /* @noEscape */ $secureRenderer->renderEventListenerAsTag(
+                'onclick',
+                "popWin('" . $block->escapeJs($shippingHelper->getTrackingPopupUrlBySalesModel($order)) .
+                "','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')",
+                'a#linkId'
+            ) ?>
+        <?php endif; ?>
