@@ -2,7 +2,7 @@
 
 namespace Bluethink\CustomApi\Observer;
 
-use Magento\Framework\Event\ObserverInterface;   
+use Magento\Framework\Event\ObserverInterface;  
 
 class BeforeShipment implements ObserverInterface
 {    

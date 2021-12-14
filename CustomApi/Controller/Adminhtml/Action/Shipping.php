@@ -19,12 +19,15 @@ class Shipping extends \Magento\Backend\App\Action
 
 	public function execute()
 	{
-        $orderId = $this->getRequest()->getParam('order_id');
+        echo $orderId = $this->getRequest()->getParam('order_id');
 		$resultPage = $this->resultPageFactory->create();
         $this->coreRegistry->register('order_id', $orderId);
 		$resultPage->getConfig()->getTitle()->prepend((__('Tracking Details')));
-
-		return $resultPage;
+		$block = $resultPage->getLayout()
+                ->createBlock('Bluethink\CustomApi\Block\Adminhtml\Action\Shipping')
+                ->setTemplate('Bluethink_CustomApi::shipping.phtml')
+                ->toHtml();
+        $this->getResponse()->setBody($block);
 	}
 
 

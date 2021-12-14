@@ -1,1 +1,18 @@
-<h1>Shahi</h1>
+<?php
+$shipmentTracks = $block->getShipmentTracksByIncrementId();
+?>
+<div>
+<table>
+    <?php foreach($shipmentTracks as $tracks)
+            {?>
+    <tr><td>Title :</td><td text-align="left"><?php echo $tracks->getTitle();?></td></tr>
+    <tr><td colspan="2"><hr style="height:5px;border-width:1px;color:gray;background-color:gray"><td><tr>
+    <tr><td>Track Number : </td><td><?php echo $tracks->getTrackNumber();?></td></tr>
+    <tr><td colspan="2"><hr style="height:5px;border-width:1px;color:gray;background-color:gray"><td><tr>
+    <tr><td>Shipping Label : </td><td><?php echo $tracks->getShippingLabel();?></td></tr>
+    <tr><td colspan="2"><hr style="height:5px;border-width:1px;color:gray;background-color:gray"><td><tr>
+    <tr><td>Tracking Url : </td><td><?php echo $tracks->getTrackingUrl();?></td></tr>
+    <?php } ?>
+</table>
+</div>
+<?php //die();?>

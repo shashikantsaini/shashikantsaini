@@ -56,16 +56,6 @@ class ExportCSV extends Command
                 'to' => $toDate,
                 'date'=> true
             ]);
-            //$output->writeln(print_r($collection->getData()));
-            /*foreach ($collection as $customer) {
-                $data = [];
-                $data[] = $customer->getId();
-                $data[] = $customer->getName();
-                $data[] = $customer->getEmail();
-                $data[] = $customer->getCreatedAt();
-                $stream->writeCsv($data);
-                $output->writeln($data[0]."  ".$data[1]."  ".$data[2]."  ".$data[3]);
-            }*/
             $output->writeln($fromDate."  ".$toDate);
             $output->writeln(print_r($collection->getData()));
         }
