@@ -22,25 +22,13 @@ endif; ?>
 
 <h3><b> Shipping & Handling Information </b></h3>
 <a href="#"
-   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/shipping',['order_id'=> $order->getIncrementId()])?>","windowName":"shippingDetail","width":500,"height":300,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
-   title="<?php /* @escapeNotVerified */ echo __('Shipping Detail') ?>">
-    <span><?php /* @escapeNotVerified */ echo __('Shipping Detail') ?></span>
-</a>
-<a href="#"
-   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/pdf',['order_id'=> $order->getIncrementId()])?>","windowName":"trackingUrl","width":700,"height":500,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
+   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/shipping',['order_id'=> $order->getIncrementId()])?>","windowName":"trackingUrl","width":500,"height":300,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
    title="<?php /* @escapeNotVerified */ echo __('Tracking Url') ?>">
     <span><?php /* @escapeNotVerified */ echo __('Tracking Url') ?></span>
 </a>
-<?php  if ($order->getTracksCollection()->count()): ?>
-            <p>
-                <a href="#" id="linkId" title="<?= $block->escapeHtmlAttr(__('Track Order')) ?>">
-                    <?= $block->escapeHtml(__('Track Order')) ?>
-                </a>
-            </p>
-            <?= /* @noEscape */ $secureRenderer->renderEventListenerAsTag(
-                'onclick',
-                "popWin('" . $block->escapeJs($shippingHelper->getTrackingPopupUrlBySalesModel($order)) .
-                "','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')",
-                'a#linkId'
-            ) ?>
-        <?php endif; ?>
+<a href="#"
+   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/pdf',['order_id'=> $order->getIncrementId()])?>","windowName":"shippinglabel","width":700,"height":500,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
+   title="<?php /* @escapeNotVerified */ echo __('Shipping Label') ?>">
+    <span><?php /* @escapeNotVerified */ echo __('Shipping Label') ?></span>
+</a>
+<a href="<?php echo $block->getUrl('customapi/csv/export')?>">Collection</a>
