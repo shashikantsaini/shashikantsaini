@@ -1,0 +1,58 @@
+<?php
+$helper = $this->helper('Bluethink\CsvOperation\Helper\Data');
+?>
+<html>
+<head>
+    <h1>Direct Export to CSV</h1>
+<style>
+h1 
+{
+  text-align: center;
+  color: black;
+}
+#select 
+{
+  text-align: center;
+  color: black;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+<form id="frm" action="" method="post">
+<div><input name="form_key" type="hidden" value="<?php echo $helper->getFormKey();?>" /></div>
+    <div id="select"><label for="coupon">Magento CSV Export :</label>
+
+    <select name="coupon" id="coupon" autofocus>
+    <option value=""></option>
+    <option value="<?php echo $this->getUrl("csv/csv/export");?>">Bulk Coupon Export</option>
+    </select></div>
+</form>
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui'], function($){
+        $(document).ready( function() {
+            $('#coupon').change(function(){ 
+                var url = $(this).val();
+                var frm =$('#frm').serialize(); 
+                alert(frm);
+                //return false;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    dataType: "json",
+                    data: $('#frm').serialize(),
+                    success: function (result) {
+                            console.log(result);
+                            alert(result.message);
+                            location.reload(true); 
+                    }
+                });
+            });
+        });
+    });
+</script>
