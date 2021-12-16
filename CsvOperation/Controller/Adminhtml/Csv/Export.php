@@ -102,7 +102,6 @@ class Export extends \Magento\Backend\App\Action
  	       	'to_date',
 			'uses_per_customer',
 			'is_active',
-<<<<<<< HEAD
 			'conditions_serialized',
 			'actions_serialized',
 			'stop_rules_processing',
@@ -118,23 +117,6 @@ class Export extends \Magento\Backend\App\Action
             'is_rss',
             'coupon_type',
             'use_auto_generation',
-=======
-			// 'conditions_serialized',
-			// 'actions_serialized',
-			// 'stop_rules_processing',
-			// 'is_advanced',
-			// 'product_ids',
-            // 'sort_order',
-        	// 'simple_action',
-        	'discount_amount',
-        	'discount_qty',
-            // 'discount_step',
-            'apply_to_shipping',
-        	'times_used',
-            // 'is_rss',
-            // 'coupon_type',
-            // 'use_auto_generation',
->>>>>>> develop
             'uses_per_coupon',
             'simple_free_shipping',
 			'code',
@@ -142,17 +124,10 @@ class Export extends \Magento\Backend\App\Action
             'usage_limit',		
             'usage_per_customer',
             'expiration_date',
-<<<<<<< HEAD
 			'is_primary',
             'created_at',            
 			'type',
             'generated_by_dotmailer'   	
-=======
-			// 'is_primary',
-            'created_at'            
-			// 'type',
-            // 'generated_by_dotmailer'   	
->>>>>>> develop
 		];
 		foreach($ruleCollectionData as $data)
 		{
@@ -164,7 +139,6 @@ class Export extends \Magento\Backend\App\Action
 				$data['to_date'],
 				$data['uses_per_customer'],
 				$data['is_active'],
-<<<<<<< HEAD
 				$data['conditions_serialized'],
 				$data['actions_serialized'],
 				$data['stop_rules_processing'],
@@ -180,23 +154,6 @@ class Export extends \Magento\Backend\App\Action
 				$data['is_rss'], 
 				$data['coupon_type'], 
 				$data['use_auto_generation'], 
-=======
-				// $data['conditions_serialized'],
-				// $data['actions_serialized'],
-				// $data['stop_rules_processing'],
-				// $data['is_advanced'],
-				// $data['product_ids'],
-				// $data['sort_order'],
-				// $data['simple_action'],
-				$data['discount_amount'],
-				$data['discount_qty'],
-				// $data['discount_step'],
-				$data['apply_to_shipping'],
-				$data['times_used'],
-				// $data['is_rss'], 
-				// $data['coupon_type'], 
-				// $data['use_auto_generation'], 
->>>>>>> develop
 				$data['uses_per_coupon'],
 				$data['simple_free_shipping'], 
 				$data['code'], 
@@ -204,17 +161,10 @@ class Export extends \Magento\Backend\App\Action
 				$data['usage_limit'],
 				$data['usage_per_customer'],
 				$data['expiration_date'],
-<<<<<<< HEAD
 				$data['is_primary'],
 				$data['created_at'],
 				$data['type'],
 				$data['generated_by_dotmailer']
-=======
-				// $data['is_primary'],
-				$data['created_at']
-				// $data['type'],
-				// $data['generated_by_dotmailer']
->>>>>>> develop
 			];
 		}
     	return $result;
