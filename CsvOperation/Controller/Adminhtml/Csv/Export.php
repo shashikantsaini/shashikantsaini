@@ -127,7 +127,7 @@ class Export extends \Magento\Backend\App\Action
 			// 'is_primary',
             'created_at'            
 			// 'type',
-            // 'generated_by_dotmailer'   	
+            // 'generated_by_dotmailer'
 		];
 		foreach($ruleCollectionData as $data)
 		{
