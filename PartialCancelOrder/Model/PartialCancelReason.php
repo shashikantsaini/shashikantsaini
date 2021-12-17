@@ -3,9 +3,9 @@
 namespace Bluethink\PartialCancelOrder\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use Bluethink\PartialCancelOrder\Model\ResourceModel\PartialCancel as ResourceModel;
+use Bluethink\PartialCancelOrder\Model\ResourceModel\PartialCancelReason as ResourceModel;
 
-class PartialCancel extends AbstractModel
+class PartialCancelReason extends AbstractModel
 {
     protected function _construct()
     {

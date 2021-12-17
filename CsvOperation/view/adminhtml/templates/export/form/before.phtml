@@ -2,42 +2,15 @@
 $helper = $this->helper('Bluethink\CsvOperation\Helper\Data');
 ?>
 <html>
-<<<<<<< HEAD
 <body>
 <form id="frm" action="" method="post">
 <div><input name="form_key" type="hidden" value="<?php echo $helper->getFormKey();?>" /></div>
     <label for="coupon">Magento CSV Export :</label>
-=======
-<head>
-    <h1>Direct Export to CSV</h1>
-<style>
-h1 
-{
-  text-align: center;
-  color: black;
-}
-#select 
-{
-  text-align: center;
-  color: black;
-  font-size: 20px;
-}
-</style>
-</head>
-<body>
-<form id="frm" action="" method="post">
-<div><input name="form_key" type="hidden" value="<?php echo $helper->getFormKey();?>" /></div>
-    <div id="select"><label for="coupon">Magento CSV Export :</label>
->>>>>>> develop
 
     <select name="coupon" id="coupon" autofocus>
     <option value=""></option>
     <option value="<?php echo $this->getUrl("csv/csv/export");?>">Bulk Coupon Export</option>
-<<<<<<< HEAD
     </select>
-=======
-    </select></div>
->>>>>>> develop
 </form>
 </body>
 </html>
