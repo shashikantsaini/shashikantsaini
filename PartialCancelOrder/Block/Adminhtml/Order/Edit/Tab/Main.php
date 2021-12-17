@@ -22,7 +22,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic
         $result = $this->partialCancel->getCollection();
         foreach($result as $option)
         {
-            $options[] = $option->getReason();      
+            $options[] = ['value' => $option->getReasonCode(), 'label' => $option->getReasonLabel()];     
         }
 
         $model = $this->_coreRegistry->registry('order_data');
@@ -39,12 +39,12 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic
         $fieldset->addField('entity_id', 'hidden', ['name' => 'entity_id']);
 
         $fieldset->addField(
-            'reason',
+            'reason_code',
             'select',
             [
-                'name' => 'reason',
+                'name' => 'reason_code',
                 'label' => __('Reason for Cancellation'),
-                'id' => 'reason',
+                'id' => 'reason_code',
                 'title' => __('Reason for Cancellation'),
                 'class' => 'required-entry',
                 'required' => true,

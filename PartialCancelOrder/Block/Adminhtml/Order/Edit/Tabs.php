@@ -25,7 +25,7 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
     protected function _prepareLayout()
     {
         $this->addTab(
-            'main',
+            'reason',
             [
                 'label' => __('Reason For Cancel'),
                 'content' => $this->getLayout()->createBlock(
@@ -36,12 +36,11 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
         );
 
         $this->addTab(
-            'status',
+            'cancel_qty',
             [
                 'label' => __('Select Items'),
-                'content' => $this->getLayout()->createBlock(
-                    'Bluethink\PartialCancelOrder\Block\Adminhtml\Order\Edit\Tab\Status'
-                )->toHtml(),
+                'content' => $this->getLayout()->createBlock("Bluethink\PartialCancelOrder\Block\Adminhtml\Item\ItemList")
+                                                ->setTemplate("Bluethink_PartialCancelOrder::itemlist.phtml")->toHtml(),
             ]
         );
 
