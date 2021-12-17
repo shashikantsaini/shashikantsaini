@@ -1,0 +1,52 @@
+<html>
+<head>
+<style>
+td {
+    padding-right: 10px;
+}
+tr:first-child {
+  border-bottom: 1px solid grey;
+}
+.qtyCancel {
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  padding: 10px;
+}
+</style>
+</head>
+<table>
+    <tr>
+        <td>Product</td>
+        <td>ItemStatus</td>
+        <td>Price</td>
+        <td>Qty</td>
+        <td>Row Total</td>
+        <td>Qty Remaining</td>
+        <td>Qty To Cancel</td>
+    </tr>       
+        <?php 
+            $x=1; 
+            foreach($block->getItemsCollection() as $item)
+            { ?>
+            <tr>
+                <td><?=$x.".".$item->getName()."<br>".$item->getSku(); ?></td>
+                <td>Invoiced</td>
+                <td><?=$block->getFormattedPrice($item->getBasePriceInclTax());?></td>
+                <td><?php   echo "Ordered  ".(int) $item->getQtyOrdered()."<br>";
+                            if((int)$item->getQtyInvoiced()>0)
+                            {
+                                echo "Invoiced ".(int) $item->getQtyInvoiced()."<br>";
+                            }
+                            if((int)$item->getQtyCanceled()>0)
+                            {
+                                echo "Canceled ".(int) $item->getQtyCanceled();
+                            }
+                            ?></td>
+                <td><?=$block->getFormattedPrice($item->getBaseRowTotalInclTax());?></td>
+                <td><?=(int) $item->getQtyOrdered();?></td>
+                <td><div class="qtyCancel"><input type="text" id="itemId" name="itemId[<?=$item->getItemId();?>]" value="" size="1"/></div></td>
+            </tr>   
+            <?php $x++;}?>    
+</table>
+</html>
