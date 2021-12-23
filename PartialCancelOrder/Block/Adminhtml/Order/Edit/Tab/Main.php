@@ -2,7 +2,7 @@
 
 namespace Bluethink\PartialCancelOrder\Block\Adminhtml\Order\Edit\Tab;
 
-use Bluethink\PartialCancelOrder\Model\PartialCancel;
+use Bluethink\PartialCancelOrder\Model\PartialCancelReason;
 
 class Main extends \Magento\Backend\Block\Widget\Form\Generic
 {
@@ -10,16 +10,16 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
-        PartialCancel $partialCancel,
+        PartialCancelReason $partialCancelreason,
         array $data = []
     ) {
         parent::__construct($context, $registry, $formFactory, $data);
-        $this->partialCancel = $partialCancel;
+        $this->partialCancelreason = $partialCancelreason;
     }
 
     protected function _prepareForm()
     {
-        $result = $this->partialCancel->getCollection();
+        $result = $this->partialCancelreason->getCollection();
         foreach($result as $option)
         {
             $options[] = ['value' => $option->getReasonCode(), 'label' => $option->getReasonLabel()];     

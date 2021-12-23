@@ -1,0 +1,67 @@
+<?php
+// $block->getCheckoutSession()->setAuthCode('abcd');
+// $authcode = $block->getCheckoutSession()->getAuthCode();
+// if($authcode)
+// {
+
+// }
+?>
+<html>
+<title>Autorize Page</title>
+<head>
+</head>
+<body>
+    <form id="frm" action="" method="post">
+        <div class="orderid"><label>Order Id :</label><label><?php echo $block->getOrder()->getIncrementId(); ?></label></div>
+        <div class="customer_name"><label>Name :</label><label><?php echo $block->getOrder()->getCustomerFirstname()." ".$block->getOrder()->getCustomerMiddlename()." ".$block->getOrder()->getCustomerLastname(); ?></label></div>
+        <div class="order_amount"><label>Total Amount :</label><label><?php echo $block->getOrder()->getGrandTotal(); ?></label></div>
+        <div class="authorize"><input type="radio" id="optauth" name="authorize" value="authorize">Authorize
+                               <input type="radio" id="optdec" name="authorize" value="decline">Decline</div>
+        <div class="atzbtn"><input type="submit" id="authorizbtn" name="authorizbtn" Value="Submit"></div>
+</form>
+</body>
+</html>
+
+<script type="text/javascript">
+require(['jquery', 'jquery/ui'], function($){
+  $(document).ready( function() {
+        $('#authorizbtn').click(function(e){
+            e.preventDefault();
+            var auth = $('input[name="authorize"]:checked').val();
+
+            if(auth == "authorize")
+            {
+                var url = "<?php echo $this->getUrl("custompaymethod/status/authorize");?>";
+                var url_success = "<?php echo $this->getUrl("checkout/onepage/success");?>";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    dataType: "json",
+                    data: $('#frm').serialize(),
+                    success: function (result) {
+                            console.log(result);
+                            window.location.replace(url_success); 
+                    }
+                });
+            }
+            if(auth == "decline")
+            {
+                var url = "<?php echo $this->getUrl("custompaymethod/status/decline");?>";
+                var url_decline = "<?php echo $this->getUrl("checkout/onepage/failure");?>" 
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    dataType: "json",
+                    data: $('#frm').serialize(),
+                    success: function (result) {
+                            console.log(result);
+                            window.location.replace(url_decline); 
+                    }
+                });
+            }
+            return false;
+        });
+    });
+});
+</script>
+
