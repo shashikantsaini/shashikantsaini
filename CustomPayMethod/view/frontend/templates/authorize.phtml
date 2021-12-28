@@ -1,9 +1,10 @@
 <?php
 // $block->getCheckoutSession()->setAuthCode('abcd');
 // $authcode = $block->getCheckoutSession()->getAuthCode();
-// if($authcode)
+// if($authcode && !$block->getBaseUrl())
 // {
-
+//     header('Location:'.$this->getUrl("custompaymethod/status/reverse"));
+//     exit;
 // }
 ?>
 <html>
@@ -24,7 +25,7 @@
 
 <script type="text/javascript">
 require(['jquery', 'jquery/ui'], function($){
-  $(document).ready( function() {
+    $(document).ready( function() {
         $('#authorizbtn').click(function(e){
             e.preventDefault();
             var auth = $('input[name="authorize"]:checked').val();
