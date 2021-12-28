@@ -3,7 +3,10 @@ $shipmentTracks = $block->getShipmentTracksByIncrementId();
 ?>
 <div>
 <table>
-    <?php foreach($shipmentTracks as $tracks)
+    <?php 
+    if($block->getShipmentTracksByIncrementId())
+    {
+    foreach($shipmentTracks as $tracks)
             {?>
     <tr><td>Title :</td><td text-align="left"><?php echo $tracks->getTitle();?></td></tr>
     <tr><td colspan="2"><hr style="height:5px;border-width:1px;color:gray;background-color:gray"><td><tr>
@@ -12,7 +15,9 @@ $shipmentTracks = $block->getShipmentTracksByIncrementId();
     <tr><td>Shipping Label : </td><td><?php echo $tracks->getShippingLabel();?></td></tr>
     <tr><td colspan="2"><hr style="height:5px;border-width:1px;color:gray;background-color:gray"><td><tr>
     <tr><td>Tracking Url : </td><td><?php echo $tracks->getTrackingUrl();?></td></tr>
-    <?php } ?>
+    <?php } 
+
+    }?>
 </table>
 </div>
 <?php //die();?>

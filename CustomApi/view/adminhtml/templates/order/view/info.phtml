@@ -16,19 +16,22 @@ $taxHelper = $block->getData('taxHelper');
 ?>
 <?php 
 $order = $block->getOrder();
+$trackingUrl = $order->getTrackingUrl();
 if ($order->getIsVirtual()):
     return '';
 endif; ?>
 
 <h3><b> Shipping & Handling Information </b></h3>
-<a href="#"
-   data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/shipping',['order_id'=> $order->getIncrementId()])?>","windowName":"trackingUrl","width":500,"height":300,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
-   title="<?php /* @escapeNotVerified */ echo __('Tracking Url') ?>">
-    <span><?php /* @escapeNotVerified */ echo __('Tracking Url') ?></span>
-</a>
+<?php if($trackingUrl)
+{?>
+    <a href="#"
+       data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/shipping',['order_id'=> $order->getIncrementId()])?>","windowName":"trackingUrl","width":500,"height":300,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
+       title="<?php /* @escapeNotVerified */ echo __('Tracking Url') ?>">
+        <span><?php /* @escapeNotVerified */ echo __('Tracking Url') ?></span>
+    </a><?php
+}?>
 <a href="#"
    data-mage-init='{"popupWindow": {"windowURL":"<?php echo $block->getUrl('customapi/action/pdf',['order_id'=> $order->getIncrementId()])?>","windowName":"shippinglabel","width":700,"height":500,"top":0,"left":0,"resizable":0,"scrollbars":0}}'
    title="<?php /* @escapeNotVerified */ echo __('Shipping Label') ?>">
     <span><?php /* @escapeNotVerified */ echo __('Shipping Label') ?></span>
 </a>
-<a href="<?php echo $block->getUrl('customapi/csv/export')?>">Collection</a>
