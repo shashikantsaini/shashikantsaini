@@ -11,18 +11,27 @@
             </tr>
         </thead>
         <?php $_items = $block->getCancelItemsCollection();?>
-        <?php $i=0;foreach ($_items as $_item)
-        {$i++;?>
-            <tbody class="<?= /* @noEscape */ $i%2 ? 'even' : 'odd' ?>">
-                <tr>
-                    <td><?php echo $_item->getName()."<br>"."SKU:".$_item->getSku();?></td>
-                    <td><?php echo $_item->getPrice();?></td>
-                    <td><?php echo $_item->getQty();?></td>
-                    <td><?php echo $_item->getTaxAmount();?></td>
-                    <td><?php echo $_item->getDiscountAmount();?></td>
-                    <td><?php echo $_item->getRowTotalInclTax();?></td>
-                </tr>
-            </tbody><?php            
-        }?>
+        <?php 
+            if($_items)
+            {
+                $i=0;foreach ($_items as $_item)
+                {$i++;?>
+                <tbody class="<?= /* @noEscape */ $i%2 ? 'even' : 'odd' ?>">
+                    <tr>
+                        <td><?php echo $_item->getName()."<br>"."SKU:".$_item->getSku();?></td>
+                        <td><?php echo $_item->getPrice();?></td>
+                        <td><?php echo $_item->getQty();?></td>
+                        <td><?php echo $_item->getTaxAmount();?></td>
+                        <td><?php echo $_item->getDiscountAmount();?></td>
+                        <td><?php echo $_item->getRowTotalInclTax();?></td>
+                    </tr>
+                </tbody><?php            
+                }
+            }
+            else
+            {
+                echo "No record found.";
+            }
+            ?>
     </table>
 </div>
