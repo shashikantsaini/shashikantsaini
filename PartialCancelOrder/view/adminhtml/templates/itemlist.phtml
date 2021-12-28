@@ -28,25 +28,54 @@ tr:first-child {
         <?php 
             $x=1; 
             foreach($block->getItemsCollection() as $item)
-            { ?>
-            <tr>
-                <td><?=$x.".".$item->getName()."<br>".$item->getSku(); ?></td>
-                <td>Invoiced</td>
-                <td><?=$block->getFormattedPrice($item->getBasePriceInclTax());?></td>
-                <td><?php   echo "Ordered  ".(int) $item->getQtyOrdered()."<br>";
-                            if((int)$item->getQtyInvoiced()>0)
-                            {
-                                echo "Invoiced ".(int) $item->getQtyInvoiced()."<br>";
-                            }
-                            if((int)$item->getQtyCanceled()>0)
-                            {
-                                echo "Canceled ".(int) $item->getQtyCanceled();
-                            }
-                            ?></td>
-                <td><?=$block->getFormattedPrice($item->getBaseRowTotalInclTax());?></td>
-                <td><?=(int) $item->getQtyOrdered();?></td>
-                <td><div class="qtyCancel"><input type="text" id="itemId" name="itemId[<?=$item->getItemId();?>]" value="" size="1"/></div></td>
-            </tr>   
-            <?php $x++;}?>    
+            {  
+                if($item->getProductType()!='configurable')
+                {
+                    if($item->getParentItemId()!=null)
+                    {
+                       echo '<tr>
+                                <td>'.$x.'.'.$item->getName().'<br>'.$item->getSku().'</td>
+                                <td>Invoiced</td>
+                                <td>'.$block->getFormattedPrice($item->getParentItem()->getBasePriceInclTax()).'</td>
+                                <td>Ordered '.(int) $item->getQtyOrdered().'<br>';
+                                if((int)$item->getQtyInvoiced()>0)
+                                {
+                                    echo 'Invoiced '.(int) $item->getQtyInvoiced().'<br>';
+                                }
+                                if((int)$item->getQtyCanceled()>0)
+                                {
+                                    echo 'Canceled '.(int) $item->getQtyCanceled();
+                                }
+                                echo '</td>
+                                <td>'.$block->getFormattedPrice($item->getParentItem()->getBaseRowTotalInclTax()).'</td>
+                                <td>'.(int) $item->getQtyInvoiced().'</td>
+                                <td><div class="qtyCancel"><input type="text" id="item_data" name="item_data['.$item->getItemId().']" value="" size="1"/></div></td>
+                                </tr>';
+                                $x++;
+                    }
+                    else
+                    {
+                        echo '<tr>
+                                <td>'.$x.'.'.$item->getName().'<br>'.$item->getSku().'</td>
+                                <td>Invoiced</td>
+                                <td>'.$block->getFormattedPrice($item->getBasePriceInclTax()).'</td>
+                                <td>Ordered '.(int) $item->getQtyOrdered().'<br>';
+                                if((int)$item->getQtyInvoiced()>0)
+                                {
+                                    echo 'Invoiced '.(int) $item->getQtyInvoiced().'<br>';
+                                }
+                                if((int)$item->getQtyCanceled()>0)
+                                {
+                                    echo 'Canceled '.(int) $item->getQtyCanceled();
+                                }
+                                echo '</td>
+                                <td>'.$block->getFormattedPrice($item->getBaseRowTotalInclTax()).'</td>
+                                <td>'.(int) $item->getQtyInvoiced().'</td>
+                                <td><div class="qtyCancel"><input type="text" id="item_data" name="item_data['.$item->getItemId().']" value="" size="1"/></div></td>
+                                </tr>';
+                                $x++;
+                    }
+                }
+            }?>
 </table>
 </html>

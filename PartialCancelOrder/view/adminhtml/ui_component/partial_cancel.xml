@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">partial_cancel.partial_cancel_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">partial_cancel</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Bluethink\PartialCancelOrder\Block\Adminhtml\Button\Back"/>
+        </buttons>
+        <namespace>bluethink_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>partial_cancel.partial_cancel_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="partial_cancel_data_source">
+       <argument name="data" xsi:type="array">
+           <item name="js_config" xsi:type="array">
+               <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+           </item>
+       </argument>
+       <settings>
+           <submitUrl path="magenest/myform/save"/>
+       </settings>
+     <dataProvider class="Bluethink\PartialCancelOrder\Model\DataProvider" name="partial_cancel_data_source">
+           <settings>
+               <requestFieldName>id</requestFieldName>
+               <primaryFieldName>entity_id</primaryFieldName>
+           </settings>
+       </dataProvider>
+   </dataSource>
+
+    <fieldset name="order_detail_tab">
+    	<argument name="data" xsi:type="array">
+        	<item name="config" xsi:type="array">
+            	<item name="label" xsi:type="string" translate="true">Order Detail</item>
+            	<item name="collapsible" xsi:type="boolean">false</item>
+    <!-- this attribute is, if you want your custom section by default opened when product form calls, if not then set the value as false -->
+            	<item name="opened" xsi:type="boolean">true</item> 
+            	<item name="canShow" xsi:type="boolean">true</item>
+            	<item name="sortOrder" xsi:type="string">1</item>
+        	</item>
+    	</argument>
+    	<container name="order_detail_tab_container">
+        	<argument name="data" xsi:type="array">
+            	<item name="config" xsi:type="array">
+                	<item name="sortOrder" xsi:type="string">1</item>
+            	</item>
+        	</argument>
+        	<htmlContent name="html_content">
+            	<argument name="block" xsi:type="object">Bluethink\PartialCancelOrder\Block\Adminhtml\Order\Partial\View</argument>
+        	</htmlContent>
+    	</container>
+    </fieldset>
+    <fieldset name="order_item_detail_tab">
+    	<argument name="data" xsi:type="array">
+        	<item name="config" xsi:type="array">
+            	<item name="label" xsi:type="string" translate="true">Cancelled Item Details</item>
+            	<item name="collapsible" xsi:type="boolean">false</item>
+    <!-- this attribute is, if you want your custom section by default opened when product form calls, if not then set the value as false -->
+            	<item name="opened" xsi:type="boolean">true</item> 
+            	<item name="canShow" xsi:type="boolean">true</item>
+            	<item name="sortOrder" xsi:type="string">10</item>
+        	</item>
+    	</argument>
+    	<container name="order_item_detail_tab_container">
+        	<argument name="data" xsi:type="array">
+            	<item name="config" xsi:type="array">
+                	<item name="sortOrder" xsi:type="string">10</item>
+            	</item>
+        	</argument>
+        	<htmlContent name="html_content">
+            	<argument name="block" xsi:type="object">Bluethink\PartialCancelOrder\Block\Adminhtml\Order\Partial\Items</argument>
+        	</htmlContent>
+    	</container>
+    </fieldset>
+</form>

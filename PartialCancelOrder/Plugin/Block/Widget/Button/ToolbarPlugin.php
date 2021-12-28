@@ -36,20 +36,33 @@ class ToolbarPlugin
         if ('sales_order_edit' == $nameInLayout) {
             $order = $context->getOrder();
         }
-
-        if ($order) {
-        	$url = $this->urlBuilder->getUrl('partialcancelorder/order/view',['order_id' => $order->getEntityId()]); // add your full url
-            $buttonList->add(
-	            'partial_cancel_order',
-	            [
-	                'label' => __('Partial Cancel Order'),
-	            	'on_click' => sprintf("location.href = '%s';", $url),
-	                'class' => 'secondary',
-	                'id' => 'partial_cancel_order'
-	            ]
-	        );
+        
+        if ($order) 
+        {
+            $itemToShip = 0;
+            $itemInvoiced = 0;
+            foreach ($order->getAllItems() as $item) 
+            {
+                if($item->getProductType() != 'configurable' )
+                {
+                    $itemInvoiced += $item->getQtyInvoiced();
+                }
+            }
+            if($itemInvoiced > 1)
+            {
+                $url = $this->urlBuilder->getUrl('partialcancelorder/order/view',['order_id' => $order->getEntityId()]); // add your full url
+                $buttonList->add(
+                    'partial_cancel_order',
+                    [
+                        'label' => __('Partial Cancel Order'),
+                        'on_click' => sprintf("location.href = '%s';", $url),
+                        'class' => 'secondary',
+                        'id' => 'partial_cancel_order'
+                    ]
+                );
+            }
         }
-
-        return [$context, $buttonList];        
+        $result = [$context, $buttonList];
+        return $result;        
     }
 }

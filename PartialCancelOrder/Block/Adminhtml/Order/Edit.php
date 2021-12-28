@@ -34,6 +34,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
     //Overrided getSaveUrl function for save path
     public function getSaveUrl()
     {
-        return $this->getUrl('partialcancelorder/order/update',['order_id'=> $this->getOrderId()]);
+        return $this->getUrl('partialcancelorder/order/create',['order_id'=> $this->getOrderId()]);
     }
 }
