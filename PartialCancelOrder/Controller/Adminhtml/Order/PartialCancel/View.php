@@ -25,12 +25,11 @@ class View extends \Magento\Backend\App\Action
 
 	public function execute()
 	{
-		$cancelOrderId = $this->getRequest()->getParam('id');
+		$cancelOrderId = $this->getRequest()->getParam('partialcancelorder_id');
 		$cancelOrderModel = $this->partialCancelOrderFactory->create()->load($cancelOrderId);
 		$this->_coreRegistry->register('partialcancelorder_data', $cancelOrderModel);
 		$resultPage = $this->resultPageFactory->create();
 		$resultPage->getConfig()->getTitle()->prepend((__('Partial Cancellation Details')));
-		$resultPage->getLayout()->getBlock('Bluethink\PartialCancelOrder\Block\Adminhtml\Order\Partial\View');
 		return $resultPage;
 	}
 }

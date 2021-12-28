@@ -43,9 +43,12 @@ class ToolbarPlugin
             $itemInvoiced = 0;
             foreach ($order->getAllItems() as $item) 
             {
-                $itemInvoiced += $item->getQtyInvoiced();
+                if($item->getProductType() != 'configurable' )
+                {
+                    $itemInvoiced += $item->getQtyInvoiced();
+                }
             }
-            if($itemInvoiced)
+            if($itemInvoiced > 1)
             {
                 $url = $this->urlBuilder->getUrl('partialcancelorder/order/view',['order_id' => $order->getEntityId()]); // add your full url
                 $buttonList->add(

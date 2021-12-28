@@ -1,0 +1,68 @@
+<?php
+$partialOrder = $block->getPartialOrder();
+$order = $block->getOrder();
+$orderAdminDate = $block->formatDate(
+    $block->getOrderAdminDate($block->getPartialOrder()->getCreatedAt()),
+    \IntlDateFormatter::MEDIUM,
+    true
+);
+?>
+<section class="admin__page-section order-view-account-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Cancel Order & Account Information')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-information">
+        <div class="admin__page-section-item-title">
+                <span class="title">
+                <?php echo "Partial Cancel Id #".$block->getPartialOrderId(); ?>
+                </span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-information-table">
+                <tr>
+                    <th><?= $block->escapeHtml(__('Order Id')) ?></th>
+                    <td><?= $block->escapeHtml($partialOrder->getOrderId()) ?></td>
+                </tr>
+                
+                <tr>
+                    <th><?= $block->escapeHtml(__('Order Date')) ?></th>
+                    <td><?= $block->escapeHtml($orderAdminDate) ?></td>
+                </tr>
+                
+                <tr>
+                    <th><?= $block->escapeHtml(__('Reason for Cancel')) ?></th>
+                    <td><span id="reason_label"><?= $block->escapeHtml($partialOrder->getReasonLabel()) ?></span></td>
+                </tr>
+            </table>
+            </div>
+        </div>
+
+        <div class="admin__page-section-item order-account-information">
+            <?php /* Account Information */ ?>
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Account Information')) ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-account-information-table">
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Customer Name')) ?></th>
+                        <td>
+                            <?= $block->escapeHtml($order->getCustomerName()) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Email')) ?></th>
+                        <td><a href="mailto:<?= $block->escapeHtmlAttr($order->getCustomerEmail()) ?>"><?= $block->escapeHtml($order->getCustomerEmail()) ?></a></td>
+                    </tr>
+                    <?php if ($groupName = $block->getCustomerGroupName()) : ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Customer Group')) ?></th>
+                            <td><?= $block->escapeHtml($groupName) ?></td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+            </div>
+        </div>
+    </div>    
+</section>

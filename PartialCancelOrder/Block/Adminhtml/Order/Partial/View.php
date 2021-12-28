@@ -2,38 +2,80 @@
 
 namespace Bluethink\PartialCancelOrder\Block\Adminhtml\Order\Partial;
 
-class View extends \Magento\Backend\Block\Widget\Form\Container
+use Magento\Framework\Pricing\Helper\Data;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Customer\Api\GroupRepositoryInterface;
+
+class View extends \Magento\Backend\Block\Template
 {
-    
-    protected $_session;
+    /**
+ 	* Block template.
+ 	*
+ 	* @var string
+ 	*/
+    protected $_template = 'partial_cancel.phtml';
 
-    
-    protected $_coreRegistry = null;
+	protected $priceHelper;
 
-   
-    protected $_backendSession;
-
-    
-    public function __construct(
-        \Magento\Backend\Block\Widget\Context $context,
-        \Magento\Backend\Model\Auth\Session $backendSession,
-        \Magento\Framework\Registry $registry,
+	public function __construct(
+        \Magento\Backend\Block\Template\Context $context,  
+        \Magento\Framework\Data\Form\FormKey $formKey,      
+        \Magento\Framework\Registry $coreRegistry,
+		OrderRepositoryInterface $orderRepository,
+        GroupRepositoryInterface $groupRepository,
+        Data $priceHelper,        
         array $data = []
-    ) {
-        $this->_backendSession = $backendSession;
-        $this->_coreRegistry = $registry;
+    )
+    {
+        $this->_coreRegistry = $coreRegistry; 
+        $this->formKey = $formKey;
+        $this->priceHelper = $priceHelper; 
+		$this->orderRepository = $orderRepository;
+        $this->groupRepository = $groupRepository;  
         parent::__construct($context, $data);
     }
 
-   
-    protected function _construct()
+    public function getPartialOrder()
     {
-        $this->_objectId = 'partialcancelorder_id';
-        $this->_controller = 'adminhtml_order_partial';
-        $this->_mode = 'view';
-        parent::_construct();
-        $this->buttonList->remove('save');
-        $this->buttonList->remove('reset');
-        $this->buttonList->remove('delete');        
+        return $this->_coreRegistry->registry('partialcancelorder_data');
+    }
+
+    public function getPartialOrderId()
+    {
+        return $this->getPartialOrder()->getEntityId();
+    }
+
+    public function getItemsCollection()
+    {
+        return $this->getOrder()->getItemsCollection();
+    }
+
+    public function getFormKey()
+    {
+        return $this->formKey->getFormKey();
+    }
+
+    public function getFormattedPrice($price)
+    {
+        return $this->priceHelper->currency($price, true, false);
+    }
+
+	public function getOrderAdminDate($createdAt)
+    {
+        return $this->_localeDate->date(new \DateTime($createdAt));
+    }
+
+	public function getOrder()
+    {
+		$orderId = $this->getPartialOrder()->getOrderId();
+		$order = $this->orderRepository->get($orderId);
+        return $order;
+    }
+
+    public function getCustomerGroupName()
+    {
+        $groupId = $this->getOrder()->getCustomerGroupId();
+        $group = $this->groupRepository->getById($groupId);
+        return $group->getCode();
     }
 }
