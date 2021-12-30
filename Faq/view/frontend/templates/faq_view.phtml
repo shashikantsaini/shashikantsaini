@@ -1,0 +1,102 @@
+<?php
+$faqCollection = $block->getFaqCollection();
+$faqGroupCollection = $block->getFaqGroupCollection();
+?>
+<html>
+<head>
+<!-- <style>
+.accordion
+{
+    overflow:hidden;
+    border-radius:4px;
+    background:#f7f7f7;
+}
+.accordion-section-title
+{
+    width:100%;
+    padding:15px;
+}
+.accordion-section-title
+{
+        width: 100%;
+        padding: 15px;
+        display: inline-block;
+        background-color: #333;
+        border-bottom: 1px solid #1a1a1a;
+        font-size: 1.2em;
+        color: #fff;
+        transition: all linear 0.5s;
+        text-decoration:none;
+}
+.accordion-section-title.active
+{
+    background-color:#4c4c4c;
+    text-decoration:none;
+    }
+    .accordion-section-title:hover
+    {
+    background-color:grey;
+    text-decoration:none;
+}
+.accordion-section:last-child .accordion-section-title
+{
+    border-bottom:none;
+}
+.accordion-section-content
+{
+    padding:15px;
+    display:none;
+}
+</style> -->
+
+</head>
+<body>
+    <div class="accordion">
+        <div class="accorfion-section">
+            <a class="accordion-section-title" href="#accordion-1">Accordion section #1</a>
+            <div id="accordion-1" class="accordion-section-content">
+                <p><?php foreach($faqGroupCollection as $faqGroup)
+                        {
+                            echo $faqGroup->getGroupname();
+                            $faqCollection->getItemById($faqGroup->getFaqgroupId());
+                        ?>
+                </p>
+            </div>
+            <a class="accordion-section-title" href="#accordion-2">Accordion section #2</a>
+            <div id="accordion-2" class="accordion-section-content">
+                <p> <?php  foreach($faqCollection as $faq)
+                            {
+                                echo $faq->getTitle();
+                    ?>
+                </p>
+            </div>
+            <a class="accordion-section-title" href="#accordion-3">Accordion section #3</a>
+            <div id="accordion-3" class="accordion-section-content">
+                <p> <?php              
+                                echo $faq->getContent();   
+                            }
+                        }
+                    ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+require(['jquery', 'jquery/ui'], function($){
+    $(document).ready(function(){
+     $('.accordion-section-title').click(function(e){
+         var currentAttrvalue = $(this).attr('href');
+         if($(e.target).is('.active')){
+             $(this).removeClass('active');
+             $('.accordion-section-content:visible').slideUp(300);
+         } else {
+             $('.accordion-section-title').removeClass('active').filter(this).addClass('active');
+             $('.accordion-section-content').slideUp(300).filter(currentAttrvalue).slideDown(300);
+         }
+     });
+ });
+</script>
+
