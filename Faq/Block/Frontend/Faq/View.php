@@ -42,8 +42,6 @@ class View extends Template
     public function getFaqCollection()
     {
         $collection = $this->faqCollection->create();
-        $collection->setPageSize(15);
-        // $collection->addAttributeToSelect('*');
         return $collection;
     }
 
@@ -51,6 +49,12 @@ class View extends Template
     {
         $collection = $this->faqGroupCollection->create();
         $collection->setPageSize(15);
+        return $collection;
+    }
+
+    public function getFaqCollectionByGroupId($groupId)
+    {
+        $collection = $this->getFaqCollection()->addFieldToFilter('group', ['eq' => $groupId]);
         return $collection;
     }
 }
