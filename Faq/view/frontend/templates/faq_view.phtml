@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class="container">
+        <div class="faqgroup-container">
+            <?php 
+                $faqGroupCollection = $block->getFaqGroupCollection();
+                if($faqGroupCollection->getSize())
+                {
+                    foreach($faqGroupCollection as $faqGroup)
+                    {
+                        if($faqGroup->getStatus())
+                        {
+                            ?> 
+                            <div class="faqgroup-section">
+                                <a class="faqgroup-section-title" href="#faqgroup-<?=$faqGroup->getFaqgroupId();?>">
+                                    <div class="faqgroup-img">
+                                        <img src="<?=$block->getMediaUrl().$faqGroup->getIcon();?>" width="100" height="100">
+                                    </div>
+                                    <div class="faqgroup-name">
+                                        <?=$faqGroup->getGroupname();?>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+            ?>
+        </div>
+        <div class="faq-container">
+            <?php 
+                if($faqGroupCollection->getSize())
+                {
+                    foreach($faqGroupCollection as $faqGroup)
+                    {
+                        if($faqGroup->getStatus())
+                        {?>
+                            <div class="faqgroup-section-content" id="faqgroup-<?=$faqGroup->getFaqgroupId();?>">                            
+                                <span class="group-name"><?=$faqGroup->getGroupname();?></span>
+                                <hr style="width:50%;margin-left:0">
+                                <?php
+                                    $faqCollection = $block->getFaqCollectionByGroupId($faqGroup->getFaqgroupId());
+                                    if($faqCollection->getSize())
+                                    {
+                                        foreach($faqCollection as $faq)
+                                        {
+                                            if($faq->getStatus())
+                                            {?>
+                                                <div class="faq">
+                                                    <div class="faq-section">
+                                                        <a class="faq-section-title" href="#faq-<?=$faq->getFaqId();?>">
+                                                            <?=$faq->getTitle();?>
+                                                        </a>
+                                                            <div id="faq-<?=$faq->getFaqId();?>" class="faq-section-content">
+                                                                <?=$faq->getContent();?>
+                                                            </div>                                            
+                                                    </div>
+                                                </div>
+                                            <?php
+                                            }
+                                        }
+                                    }?>
+                            </div>
+                        <?php
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+            ?>
+        </div>
+    </div>
+</body>
+</html>
