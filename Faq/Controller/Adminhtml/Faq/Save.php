@@ -4,6 +4,7 @@ namespace Bluethink\Faq\Controller\Adminhtml\Faq;
 
 use Magento\Backend\App\Action\Context;
 use Bluethink\Faq\Model\FaqFactory;
+use Bluethink\Faq\Api\FaqRepositoryInterface;
 
 class Save extends \Magento\Backend\App\Action
 {
@@ -13,58 +14,56 @@ class Save extends \Magento\Backend\App\Action
     var $faqFactory;
 
     /**
-     * Index constructor.
+     * @var FaqRepositoryInterface
+     */ 
+    var $faqRepository;
+
+    /**
+     * Save constructor.
      *
      * @param Context $context
      * @param FaqFactory $faqFactory
+     * @param FaqRepositoryInterface $faqRepository
      */
     public function __construct(
         Context $context,
-        FaqFactory $faqFactory
+        FaqFactory $faqFactory,
+        FaqRepositoryInterface $faqRepository
     ) {
         parent::__construct($context);
         $this->faqFactory = $faqFactory;
+        $this->faqRepository = $faqRepository;
     }
 
     public function execute()
     {
         $postdata = $this->getRequest()->getPostValue();
-        // $x = $this->getRequest()->getParam('back');
-        // echo "<pre>";
-        // print_r($x);
-        // die;
         if (!$postdata) {
-            $this->_redirect('adminfaq/faq/index');
+            $this->_redirect('*/*/index');
             return;
         }
-
-        $groups = implode(",",$postdata['group']);
-        $storeViews = implode(",",$postdata['storeview']);
-        $customerGroups = implode(",",$postdata['customer_group']);
-
-        $result = [
-            'title'=>$postdata['title'],
-            'content'=>$postdata['content'],
-            'group'=>$groups,
-            'storeview'=>$storeViews,
-            'customer_group'=>$customerGroups,
-            'sortorder'=>$postdata['sortorder'],
-            'status'=>$postdata['status'],
-        ];
         
         try {
-            $faqData = $this->faqFactory->create();
-            $faqData->setData($result);
-
+            $model = $this->faqFactory->create();
+            if ($id = (int) $this->getRequest()->getParam('faq_id')) {                
+                $model = $model->load($id);
+                if ($id != $model->getId()) {
+                    $this->messageManager->addErrorMessage(__('This FAQ no longer exists.'));
+                    return $resultRedirect->setPath('*/*/');
+                }
+            }
+            $postdata = $this->_filterFaqGroupData($postdata);
+            $model->setData($postdata);
+            
             if (isset($postdata['faq_id'])) {
-                $faqData->setFaqId($postdata['faq_id']);
+                $model->setFaqId($postdata['faq_id']);
             }
 
-            $faqData->save();
+            $model->save();
             $this->messageManager->addSuccess(__('FAQ has been successfully saved.'));
 
             if ($this->getRequest()->getParam('back')) {
-                $this->_redirect('*/*/edit',['faq_id' => $faqData->getFaqId()]);
+                $this->_redirect('*/*/edit',['faq_id' => $model->getFaqId()]);
                 return;
             }
             
@@ -72,5 +71,29 @@ class Save extends \Magento\Backend\App\Action
             $this->messageManager->addError(__($e->getMessage()));
         }
         $this->_redirect('*/*/index');
+    }
+
+    /**
+     * Filter faq group data
+     *
+     * @param array $rawData
+     * @return array
+     */
+    protected function _filterFaqGroupData(array $rawData)
+    {
+        $data = $rawData;
+        $cGroup = $data['customer_group'];
+        if (isset($cGroup)) {
+            $customerGroup = implode(',', $data['customer_group']);
+            $data['customer_group'] = $customerGroup;
+        }
+
+        $stores = $data['storeview'];
+        if (isset($stores)) {
+            $store = implode(',', $data['storeview']);
+            $data['storeview'] = $store;
+        }
+
+        return $data;
     }
 }

@@ -1,4 +1,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Bluethink\Faq\Api\FaqRepositoryInterface" type="Bluethink\Faq\Model\FaqRepository"/>
+    <preference for="Bluethink\Faq\Api\Data\FaqInterface" type="Bluethink\Faq\Model\Faq"/>
+    <preference for="Bluethink\Faq\Api\Data\FaqSearchResultInterface" type="Bluethink\Faq\Model\FaqSearchResult"/>
+    <preference for="Bluethink\Faq\Api\FaqGroupRepositoryInterface" type="Bluethink\Faq\Model\FaqGroupRepository"/>
+    <preference for="Bluethink\Faq\Api\Data\FaqGroupInterface" type="Bluethink\Faq\Model\FaqGroup"/>
+    <preference for="Bluethink\Faq\Api\Data\FaqGroupSearchResultInterface" type="Bluethink\Faq\Model\FaqGroupSearchResult"/>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -19,18 +25,4 @@
             <argument name="resourceModel" xsi:type="string">Bluethink\Faq\Model\ResourceModel\Faq</argument>
         </arguments>
     </virtualType>
-    <!-- Image Uploader -->
-    <!-- <type name="Bluethink\Faq\Model\ImageUploader">
-        <arguments>
-            <argument name="baseTmpPath" xsi:type="string">faq/tmp/image</argument>
-            <argument name="basePath" xsi:type="string">faq/image</argument>
-            <argument name="allowedExtensions" xsi:type="array">
-                <item name="jpg" xsi:type="string">jpg</item>
-                <item name="jpeg" xsi:type="string">jpeg</item>
-                <item name="gif" xsi:type="string">gif</item>
-                <item name="png" xsi:type="string">png</item>
-            </argument>
-        </arguments>
-    </type> -->
-    <!-- End Image Uploader -->
 </config>

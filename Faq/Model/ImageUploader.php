@@ -59,7 +59,7 @@ class ImageUploader
     public $allowedExtensions;
 
     /**
-     * Save constructor.
+     * ImageUploader constructor.
      *
      * @param Database $coreFileStorageDatabase
      * @param UploaderFactory $uploaderFactory

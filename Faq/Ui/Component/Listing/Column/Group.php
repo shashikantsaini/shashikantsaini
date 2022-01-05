@@ -5,23 +5,36 @@ use Bluethink\Faq\Model\ResourceModel\FaqGroup\CollectionFactory;
 use \Magento\Framework\View\Element\UiComponent\ContextInterface;
 use \Magento\Framework\View\Element\UiComponentFactory;
 use \Magento\Ui\Component\Listing\Columns\Column;
-use \Magento\Framework\Api\SearchCriteriaBuilder;
 
 class Group extends Column
 {
-    protected $_orderRepository;
-    protected $_searchCriteria;
+    /**
+     * @var CollectionFactory
+     */
+    protected $faqGroupCollection;
 
+    /**
+     * @var UiComponentFactory
+     */
+    protected $uiComponentFactory;
+
+    /**
+     * Group constructor.
+     *
+     * @param ContextInterface $context
+     * @param UiComponentFactory $uiComponentFactory
+     * @param CollectionFactory $faqGroupCollection
+     * @param array $components
+     * @param array $data
+     */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         CollectionFactory $faqGroupCollection,
-        SearchCriteriaBuilder $criteria,
         array $components = [],
         array $data = []
     ) {
         $this->faqGroupCollection = $faqGroupCollection;
-        $this->_searchCriteria  = $criteria;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 

@@ -6,6 +6,7 @@ use Bluethink\Faq\Model\ResourceModel\Faq\CollectionFactory;
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     protected $_loadedData;
+    
     /**
      * @param string $name
      * @param string $primaryFieldName
