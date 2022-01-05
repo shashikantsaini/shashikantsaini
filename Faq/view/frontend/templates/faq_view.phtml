@@ -1,138 +1,83 @@
-<?php
-$faqGroupCollection = $block->getFaqGroupCollection();
-$jQgrpId = array();
-?>
+<!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .grp-name{
-            background: #0084ff;
-            border-radius: 4px;
-            padding: 20px;
-            font-size: 20px;
-            text-align: center;
-            transition: all 0.2s;
-            margin: 0 auto;
-            width: 150px;
-        }
-        .accordion
-        {
-            overflow:hidden;
-            border-radius:4px;
-            background:#f7f7f7;
-        }
-        .accordion-section-title
-        {
-            width:100%;
-            padding:15px;
-        }
-        .accordion-section-title
-        {
-                width: 100%;
-                padding: 15px;
-                display: inline-block;
-                background-color: #001100;
-                border-bottom: 1px solid #1a1a1a;
-                font-size: 1.2em;
-                color: #000;
-                transition: all linear 0.5s;
-                text-decoration:none;
-        }
-        .accordion-section:last-child .accordion-section-title
-        {
-            border-bottom:none;
-        }
-        .accordion-section-content
-        {
-            background: #ADD8E6;
-            border-radius: 4px;
-            padding: 10px;
-            font-size: 20px;
-            text-align: left;
-            margin: 0 auto;
-            width: 1220px;
-            display :none;
-        }
-    </style>
 </head>
 <body>
-    <table>
-        <tr>
-            <?php
-                foreach($faqGroupCollection as $faqGroup)
-                {   
-                    $grpName = str_replace(' ', '', $faqGroup->getGroupname());
-                    $jQgrpId[] = $faqGroup->getFaqgroupId().$grpName;?>
-                    <td>
-                        <div class="grp-name" id="<?php echo $faqGroup->getFaqgroupId().$grpName;?>">
-                            <?php
-                                echo $faqGroup->getGroupname();
-                            ?>
-                        </div>
-                    </td>                    
-                <?php    
-                }?>
-        </tr> 
-            <?php
-                foreach($faqGroupCollection as $faqGroup)
-                { 
-                    $grpName = str_replace(' ', '', $faqGroup->getGroupname());               
-                    $faqCollection = $block->getFaqCollectionByGroupId($faqGroup->getFaqgroupId());
-                    foreach($faqCollection as $faq)
-                    {?>
-                    <tr>                      
-                        <td colspan="<?php echo $faqGroupCollection->getSize();?>">
-                        <div class="grp-content">                  
-                            <div class="<?php echo $faqGroup->getFaqgroupId().$grpName;?>">
-                                <div class="accordion">
-                                    <div class="accordion-section">
-                                        <a class="accordion-section-title" href="#accordion-<?php echo $faq->getFaqId();?>"><?php echo $faq->getTitle(); ?></a>
-                                        <div id="accordion-<?php echo $faq->getFaqId();?>" class="accordion-section-content">
-                                            <p><?php echo $faq->getContent(); ?></p>
-                                        </div>
+    <div class="container">
+        <div class="faqgroup-container">
+            <?php 
+                $faqGroupCollection = $block->getFaqGroupCollection();
+                if($faqGroupCollection->getSize())
+                {
+                    foreach($faqGroupCollection as $faqGroup)
+                    {
+                        if($faqGroup->getStatus())
+                        {
+                            ?> 
+                            <div class="faqgroup-section">
+                                <a class="faqgroup-section-title" href="#faqgroup-<?=$faqGroup->getFaqgroupId();?>">
+                                    <div class="faqgroup-img">
+                                        <img src="<?=$block->getMediaUrl().$faqGroup->getIcon();?>" width="100" height="100">
                                     </div>
-                                </div>
+                                    <div class="faqgroup-name">
+                                        <?=$faqGroup->getGroupname();?>
+                                    </div>
+                                </a>
                             </div>
-                        </div>                          
-                        </td>                        
-                    </tr>
-                    <?php
+                            <?php
+                        }
                     }
-                }?>        
-    </table>   
+                }
+                else
+                {
+
+                }
+            ?>
+        </div>
+        <div class="faq-container">
+            <?php 
+                if($faqGroupCollection->getSize())
+                {
+                    foreach($faqGroupCollection as $faqGroup)
+                    {
+                        if($faqGroup->getStatus())
+                        {?>
+                            <div class="faqgroup-section-content" id="faqgroup-<?=$faqGroup->getFaqgroupId();?>">                            
+                                <span class="group-name"><?=$faqGroup->getGroupname();?></span>
+                                <hr style="width:50%;margin-left:0">
+                                <?php
+                                    $faqCollection = $block->getFaqCollectionByGroupId($faqGroup->getFaqgroupId());
+                                    if($faqCollection->getSize())
+                                    {
+                                        foreach($faqCollection as $faq)
+                                        {
+                                            if($faq->getStatus())
+                                            {?>
+                                                <div class="faq">
+                                                    <div class="faq-section">
+                                                        <a class="faq-section-title" href="#faq-<?=$faq->getFaqId();?>">
+                                                            <?=$faq->getTitle();?>
+                                                        </a>
+                                                            <div id="faq-<?=$faq->getFaqId();?>" class="faq-section-content">
+                                                                <?=$faq->getContent();?>
+                                                            </div>                                            
+                                                    </div>
+                                                </div>
+                                            <?php
+                                            }
+                                        }
+                                    }?>
+                            </div>
+                        <?php
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+            ?>
+        </div>
+    </div>
 </body>
 </html>
-
-<script type="text/javascript">
-    require(['jquery', 'jquery/ui'], function($){
-        $(document).ready(function(){
-            $('.grp-content').children().hide();
-            $('.accordion-section-title').click(function(e){
-                    var currentAttrvalue = $(this).attr('href');
-                    if($(e.target).is('.active')){
-                        $(this).removeClass('active');
-                        $('.accordion-section-content:visible').slideUp(300);
-                    } else {
-                        $('.accordion-section-title').removeClass('active').filter(this).addClass('active');
-                        $('.accordion-section-content').slideUp(300).filter(currentAttrvalue).slideDown(300);
-                    }
-                });
-            
-            var jQgrpId = <?php echo json_encode($jQgrpId); ?>;
-            $('.grp-name').click(function(e){
-                var grpid = $(this).attr('id');
-                var grpname = $(this).attr('name');
-                $.each(jQgrpId, function( index, value ) {
-                    if(value == grpid)
-                    {  
-                        $('.'+grpid).toggle();
-                    }
-                    else
-                    {
-                        $('.'+value).hide();   
-                    }
-                });
-            });
-        });
-    });
-</script>

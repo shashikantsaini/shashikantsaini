@@ -4,6 +4,7 @@
     <table name="bluethink_faqgroup">
         <column xsi:type="int" name="faqgroup_id" padding="10" unsigned="true" identity="true" nullable="false" comment="Entity Id"/>
         <column xsi:type="varchar" name="groupname" nullable="true" length="255" comment="Group Name"/>
+        <column xsi:type="varchar" name="icon" nullable="true" length="255" comment="Icon"/>
         <column xsi:type="varchar" name="storeview" nullable="true" length="255" comment="Store View"/>
         <column xsi:type="varchar" name="customer_group" nullable="true" length="255" comment="Customer Group"/>
         <column xsi:type="int" name="sortorder" nullable="true" comment="Sort Order"/>
