@@ -7,10 +7,10 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Magento\Framework\UrlInterface;
 
-class FaqGroupActions extends Column
+class FaqUserActions extends Column
 {
     /** Url path */
-    const ROW_EDIT_URL = 'adminfaq/faqgroup/edit';
+    const ROW_EDIT_URL = 'adminfaq/faquser/edit';
     /** @var UrlInterface */
     protected $_urlBuilder;
 
@@ -48,11 +48,11 @@ class FaqGroupActions extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $name = $this->getData('name');
-                if (isset($item['faqgroup_id'])) {
+                if (isset($item['user_faq_id'])) {
                     $item[$name]['edit'] = [
                         'href' => $this->_urlBuilder->getUrl(
                             $this->_editUrl, 
-                            ['faqgroup_id' => $item['faqgroup_id']]
+                            ['user_faq_id' => $item['user_faq_id']]
                         ),
                         'label' => __('Edit'),
                     ];

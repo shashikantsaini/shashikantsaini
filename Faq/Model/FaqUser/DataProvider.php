@@ -1,7 +1,7 @@
 <?php
-namespace Bluethink\Faq\Model\Faq;
+namespace Bluethink\Faq\Model\FaqUser;
  
-use Bluethink\Faq\Model\ResourceModel\Faq\CollectionFactory;
+use Bluethink\Faq\Model\ResourceModel\FaqUser\CollectionFactory;
  
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
@@ -41,7 +41,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     
         foreach ($items as $itemData) {            
             $data = $itemData->getData();      
-            $this->_loadedData[$itemData->getFaqId()] = $data;     
+            $this->_loadedData[$itemData->getUserFaqId()] = $data;     
         }
         return $this->_loadedData;
     }

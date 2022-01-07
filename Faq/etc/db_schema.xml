@@ -38,4 +38,21 @@
             <column name="faq_id"/>
         </index>
     </table>
+
+    <!-- New Faq Table -->
+    <table name="bluethink_faq_user">
+        <column xsi:type="int" name="user_faq_id" padding="10" unsigned="true" identity="true" nullable="false" comment="Entity Id"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="varchar" name="content" nullable="true" length="255" comment="Content"/>
+        <column xsi:type="tinyint" name="authorize_status" nullable="true" comment="Authorized Status"/>
+        <column xsi:type="tinyint" name="decline_status" nullable="true" comment="Declined Status"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="New FAQ Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="true" default="CURRENT_TIMESTAMP" on_update="true" comment="New FAQ Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="user_faq_id"/>
+        </constraint>
+        <index referenceId="BLUETHINK_FAQ_ADD_NEW_USER_FAQ_ID" indexType="btree">
+            <column name="user_faq_id"/>
+        </index>
+    </table>
 </schema>
