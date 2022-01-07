@@ -14,23 +14,22 @@
                         if($faqGroup->getStatus())
                         {
                             ?> 
-                            <div class="faqgroup-section">
-                                <a class="faqgroup-section-title" href="#faqgroup-<?=$faqGroup->getFaqgroupId();?>">
-                                    <div class="faqgroup-img">
-                                        <img src="<?=$block->getMediaUrl().$faqGroup->getIcon();?>" width="100" height="100">
-                                    </div>
-                                    <div class="faqgroup-name">
-                                        <?=$faqGroup->getGroupname();?>
-                                    </div>
-                                </a>
-                            </div>
+                            <a class="faqgroup-section-title faqgroup-section" href="#faqgroup-<?=$faqGroup->getFaqgroupId();?>">
+                                <div class="faqgroup-section-title-content">
+                                    <img src="<?=$block->getMediaUrl().$faqGroup->getIcon();?>" width="40" height="40">
+                                    <?=$faqGroup->getGroupname();?>
+                                </div>
+                            </a>                           
                             <?php
                         }
                     }
                 }
                 else
-                {
-
+                {?>
+                    <div class="faqgroup-section-title-content-empty">
+                        No Faq Groups Available
+                    </div>
+                <?php
                 }
             ?>
         </div>
@@ -44,7 +43,7 @@
                         {?>
                             <div class="faqgroup-section-content" id="faqgroup-<?=$faqGroup->getFaqgroupId();?>">                            
                                 <span class="group-name"><?=$faqGroup->getGroupname();?></span>
-                                <hr style="width:50%;margin-left:0">
+                                <hr style="width:100%;margin-left:0">
                                 <?php
                                     $faqCollection = $block->getFaqCollectionByGroupId($faqGroup->getFaqgroupId());
                                     if($faqCollection->getSize())
@@ -66,18 +65,27 @@
                                             <?php
                                             }
                                         }
+                                    }
+                                    else
+                                    {?>
+                                        <div class="faqgroup-section-title-content-empty">
+                                            No Faq Available
+                                        </div>
+                                    <?php
                                     }?>
                             </div>
                         <?php
                         }
                     }
                 }
-                else
-                {
-
-                }
             ?>
         </div>
+        <div class="faq-ask-ques">Click to Ask A Question</div>
+        <hr style="width:100%;margin-left:0">
+        <div class="faq-add-new">
+            <?php echo $this->getLayout()->createBlock("Bluethink\Faq\Block\Frontend\Faq\UserFaq")->setTemplate("Bluethink_Faq::faq_add_new.phtml")->toHtml() ?>
+        </div>
     </div>
+    
 </body>
 </html>

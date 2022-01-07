@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Faq</title>
+</head>
+<style>
+.new-faq-form{
+    background : #E96747;
+    border-style : solid;
+    border-radius: 10px;
+    border-width : 5px;
+    padding : 10px;
+}
+.new-faq > div{
+    font-size: 17px;
+    font-weight:bold;
+    padding :10px;
+}
+.new-faq-ques-label{
+    color : #000000;
+}
+.form-submit-button{
+    background : #0066A2;
+    color : white;
+    border-style : outset;
+    border-color : #0066A2;
+    height : 50px;
+    width : 100px;
+    font : bold 15px arial,sans-serif;
+    text-shadow : none;
+}
+.faq-msg{
+    display : none;
+    font-size : 17px;
+    font-weight : bold;
+    color : #000000;
+}
+</style>
+<body>
+    <div class="new-faq-form">
+        <form id="frm_add_faq" action="" method="POST">
+            <div class="new-faq">
+                <div class="new-faq-ques-label">     
+                    <label>Ask Your Question :</label>
+                </div>
+                <div class="new-faq-ques-text"> 
+                    <input type="text"  id="new_ques" name="title"/>
+                    <input type="hidden"  id="url" value="<?php echo $this->getUrl("faq/index/adduserfaq");?>"/>
+                </div>            
+                <div class="new-faq-ques-submit">
+                    <input class="form-submit-button" type="submit" id="submit" name="submit" Value="SUBMIT"/>
+                </div>
+                <div class="faq-msg" id="msg">*</div>
+            </div>            
+        </form>
+    </div>
+</body>
+</html>
+

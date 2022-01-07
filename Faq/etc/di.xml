@@ -10,6 +10,7 @@
             <argument name="collections" xsi:type="array">
                 <item name="faqgroup_grid_data_source" xsi:type="string">Bluethink\Faq\Model\ResourceModel\FaqGroup\Grid\Collection</item>
                 <item name="faq_grid_data_source" xsi:type="string">Bluethink\Faq\Model\ResourceModel\Faq\Grid\Collection</item>
+                <item name="faquser_grid_data_source" xsi:type="string">Bluethink\Faq\Model\ResourceModel\FaqUser\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
@@ -23,6 +24,12 @@
         <arguments>
             <argument name="mainTable" xsi:type="string">bluethink_faq</argument>
             <argument name="resourceModel" xsi:type="string">Bluethink\Faq\Model\ResourceModel\Faq</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Bluethink\Faq\Model\ResourceModel\FaqUser\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bluethink_faq_user</argument>
+            <argument name="resourceModel" xsi:type="string">Bluethink\Faq\Model\ResourceModel\FaqUser</argument>
         </arguments>
     </virtualType>
 </config>
