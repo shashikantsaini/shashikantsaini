@@ -1,11 +1,11 @@
 <?php
 
-namespace Bluethink\Faq\Controller\Adminhtml\FaqGroup;
+namespace Bluethink\Faq\Controller\Adminhtml\FaqUser;
 
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
-use Bluethink\Faq\Model\ResourceModel\FaqGroup\CollectionFactory;
+use Bluethink\Faq\Model\ResourceModel\FaqUser\CollectionFactory;
 
 class MassDelete extends \Magento\Backend\App\Action
 {

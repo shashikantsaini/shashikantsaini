@@ -24,7 +24,7 @@ class Edit extends \Magento\Backend\App\Action
     private $faqGroupFactory;
 
     /**
-     * Index constructor.
+     * Edit constructor.
      *
      * @param Context $context
      * @param PageFactory $resultPageFactory

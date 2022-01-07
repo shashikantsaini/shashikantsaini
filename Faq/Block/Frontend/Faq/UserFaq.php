@@ -10,7 +10,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Bluethink\Faq\Model\ResourceModel\Faq\CollectionFactory as FaqCollection;
 use Bluethink\Faq\Model\ResourceModel\FaqGroup\CollectionFactory as FaqGroupCollection;
 
-class View extends Template
+class UserFaq extends Template
 {
     /**
      * @var Registry
@@ -58,21 +58,5 @@ class View extends Template
     {
         $collection = $this->faqGroupCollection->create();
         return $collection;
-    }
-
-    public function getFaqCollectionByGroupId($groupId)
-    {
-        $collection = $this->getFaqCollection()->addFieldToFilter('group', ['eq' => $groupId]);
-        return $collection;
-    }
-
-    /**
-     * Get media url
-     */
-    public function getMediaUrl()
-    {
-        $mediaUrl = $this->storeManager->getStore()
-            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'faq/tmp/icon/';
-        return $mediaUrl;
     }
 }
