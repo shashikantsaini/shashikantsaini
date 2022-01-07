@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-	<group id="default">
+	<group id="test_cron">
 		<job instance="Bluethink\CronTest\Cron\Customemail" method="execute" name="bluethink_crontest_cron">
 			<schedule>* * * * *</schedule>
 		</job>

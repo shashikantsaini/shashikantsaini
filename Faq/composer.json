@@ -1,25 +1,21 @@
 {
-    "name": "bluethink/module-faq",
-    "description": "Magento2 FAQ Module",
-    "homepage": "https://github.com/mageprince/magento2-FAQ",
+    "name": "bluethink/faq",
+    "description": "Magento2 FAQ Module with User Faq Addition",
+    "homepage": "https://github.com/shashikantsaini/shashikantsaini/tree/master/Faq",
     "type": "magento2-module",
-    "version": "2.0.10",
-    "license": "GPL-3.0-or-later",
+    "version": "0.0.4",
     "authors": [
         {
-          "name": "Mageprince",
-          "email": "contact@mageprince.com"
+          "name": "Shashi Kant Saini",
+          "email": "shashikantsaini.sk@gmail.com"
         }
     ],
-    "support": {
-        "issues": "https://github.com/mageprince/magento2-FAQ/issues"
-    },
     "autoload": {
         "files": [
             "registration.php"
         ],
         "psr-4": {
-            "Mageprince\\Faq\\": ""
+            "Bluethink\\Faq\\": ""
         }
     }
 }
