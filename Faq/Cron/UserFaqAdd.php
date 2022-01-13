@@ -55,11 +55,11 @@ class UserFaqAdd
             {
                 $faqUserData->setAddedStatus(1);
                 $faqUserData->save();
-                $this->logger->info('Saved');
+                $this->logger->info('User Faq with id : '.$faqUserData->getUserFaqId().' is Saved with id : '.$faq->getFaqId());
             }
             else
             {
-                $this->logger->info('Not saved');
+                $this->logger->info('User Faq with id : '.$faqUserData->getUserFaqId().' is Not saved');
             }
         }
 

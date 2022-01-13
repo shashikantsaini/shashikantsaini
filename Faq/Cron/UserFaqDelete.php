@@ -39,7 +39,7 @@ class UserFaqDelete
         foreach($faqUser as $faqUserData)
         {
             $faqUserData->delete();
-            $this->logger->info('Delete');
+            $this->logger->info('Deleted user faq with Id : ',$faqUserData->getUserFaqId());
         }
 
     }
