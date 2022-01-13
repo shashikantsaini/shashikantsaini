@@ -25,7 +25,7 @@
 			<argument name="requestFieldName" xsi:type="string">user_faq_id</argument>
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
-					<item name="submit_url" path="*/*/add" xsi:type="url"/>
+					<item name="submit_url" path="*/*/save" xsi:type="url"/>
 				</item>
 			</argument>
 		</argument>
@@ -102,7 +102,7 @@
                     <item name="wysiwyg" xsi:type="boolean">true</item>
                     <item name="dataScope" xsi:type="string">content</item>
                     <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">false</item>
                     </item>
                 </item>
             </argument>
@@ -118,7 +118,7 @@
 					<item name="sortOrder" xsi:type="number">50</item>
 					<item name="dataScope" xsi:type="string">group</item>
 					<item name="validation" xsi:type="array">
-						<item name="required-entry" xsi:type="boolean">true</item>
+						<item name="required-entry" xsi:type="boolean">false</item>
 					</item>
 				</item>
 			</argument>
@@ -133,9 +133,9 @@
 		            <item name="formElement" xsi:type="string">multiselect</item>
 		            <item name="source" xsi:type="string">popup</item>
 		            <item name="dataScope" xsi:type="string">storeview</item>
-		            <item name="default" xsi:type="string">0,1,2,3,4</item>
+					<item name="default" xsi:type="string"></item>
 		            <item name="validation" xsi:type="array">
-		                <item name="required-entry" xsi:type="boolean">true</item>
+		                <item name="required-entry" xsi:type="boolean">false</item>
 		            </item>
 		        </item>
 		    </argument>
@@ -150,9 +150,8 @@
 					<item name="formElement" xsi:type="string">multiselect</item>
 					<item name="source" xsi:type="string">popup</item>
 					<item name="dataScope" xsi:type="string">customer_group</item>
-					<item name="default" xsi:type="string">0,1,2,3,4</item>
 					<item name="validation" xsi:type="array">
-						<item name="required-entry" xsi:type="boolean">true</item>
+						<item name="required-entry" xsi:type="boolean">false</item>
 					</item>
 				</item>
 			</argument>

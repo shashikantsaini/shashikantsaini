@@ -55,8 +55,9 @@ class Edit extends \Magento\Backend\App\Action
         if ($faqUserId) {
            $faqUserData = $faqUserData->load($faqUserId);
            $faqUserAuth = $faqUserData->getAuthorizeStatus();
-           if ($faqUserAuth) {
-               $this->messageManager->addError(__('FAQ already authorized.'));
+           $faqUserDec = $faqUserData->getDeclineStatus();
+           if ($faqUserAuth || $faqUserDec) {
+               $this->messageManager->addError(__('User FAQ already Checked.'));
                $this->_redirect('adminfaq/faquser/index');
                return;
            }

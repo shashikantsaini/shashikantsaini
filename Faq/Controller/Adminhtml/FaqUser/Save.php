@@ -6,7 +6,7 @@ use Magento\Backend\App\Action\Context;
 use Bluethink\Faq\Model\FaqUserFactory;
 use Bluethink\Faq\Model\FaqFactory;
 
-class Add extends \Magento\Backend\App\Action
+class Save extends \Magento\Backend\App\Action
 {
     /**
      * @var FaqUserFactory
@@ -37,48 +37,42 @@ class Add extends \Magento\Backend\App\Action
 
     public function execute()
     {
-        echo "<pre>";
-        $postdata = $this->getRequest()->getPostValue();
-        // print_r($postdata);
-        // die('Shasi');
-        
-
+        $postdata = $this->getRequest()->getPostValue();        
+        $authorizeStatus = $this->getRequest()->getParam('checkuserfaq');
+              
         if (!$postdata) {
-            $this->_redirect('adminfaq/faqgroup/index');
+            $this->_redirect('*/*/index');
             return;
-        }       
-        
+        }      
         
         $modelFaqUser = $this->faqUserFactory->create();
         $modelFaqUser = $modelFaqUser->load([$postdata['user_faq_id']]);
         try {
             if($postdata['checkuserfaq'])
             {
-                $modelFaq = $this->faqFactory->create();
                 $postdata = $this->_filterFaqGroupData($postdata);
-                $modelFaq->setData($postdata);
-                $modelFaqUser->setContent($postdata['content'])
-                             ->setAuthorizeStatus(1)
-                             ->setDeclineStatus(0);
+                $modelFaqUser->setData($postdata)
+                             ->setAuthorizeStatus($authorizeStatus)
+                             ->setDeclineStatus(0)
+                             ->setAddedStatus(0);
     
                 if (isset($postdata['user_faq_id'])) {
                     $modelFaqUser->setUserFaqId($postdata['user_faq_id']);
                 }
                 
-                $modelFaq->save();
                 $modelFaqUser->save();
     
-                $this->messageManager->addSuccess(__('FAQ has been successfully saved.'));
+                $this->messageManager->addSuccess(__('User FAQ has been Authorized.'));
             }
             else
             {
-                $modelFaqUser->setContent($postdata['content'])
+                $modelFaqUser->setData($postdata)
                              ->setAuthorizeStatus(0)
-                             ->setDeclineStatus(1);
+                             ->setDeclineStatus(1)
+                             ->setAddedStatus(0);
                 $modelFaqUser->save();
                 $this->messageManager->addSuccess(__('User Faq has Been Updated as You Declined'));
             }
-
         } catch (\Exception $e) {
             $this->messageManager->addError(__($e->getMessage()));
         }

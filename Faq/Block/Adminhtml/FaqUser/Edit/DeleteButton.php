@@ -17,7 +17,7 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
                 'label' => __('Delete FAQ'),
                 'class' => 'delete',
                 'on_click' => 'deleteConfirm(\'' . __(
-                    'Are you sure you want to do this?'
+                    'Are you sure you want to delete this?'
                 ) . '\', \'' . $this->getDeleteUrl() . '\')',
                 'sort_order' => 20,
             ];
